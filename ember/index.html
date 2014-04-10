@@ -108,7 +108,7 @@
       </div>
       <div class="issue-actions">
         <a href="#" class="btn btn-default btn-xs">Archive</a>
-        {{#link-to "requests.edit" class="btn btn-default btn-xs"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
+        {{#link-to "requests.edit" this class="btn btn-default btn-xs"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
       </div>
     </li>
   </script>
@@ -122,7 +122,7 @@
         <div class="pull-right">
           <a href="#" class="btn btn-default"><i class="fa fa-plus"></i> New Request</a>
           <a href="#" class="btn btn-default">Archive</a>
-          {{#link-to "requests.edit" class="btn btn-default"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
+          {{#link-to "requests.edit" this class="btn btn-default"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
         </div>
       </div>
     </div>
@@ -147,7 +147,7 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/edit">
-    <h2>Editing {{ title }}</h2>
+    <h2>{{ title }}</h2>
     <form role="form">
       <div class="form-group">
         <label>Title</label>
@@ -155,9 +155,13 @@
       </div>
       <div class="form-group">
         <label>Description</label>
-        {{input type="text" value=description class="form-control" placeholder="Enter description"}}
+        {{textarea value=description rows=10 class="form-control" placeholder="Enter description"}}
       </div>
-      <button type="submit" class="btn btn-default" {{action 'save' this}} >Submit</button>
+      <hr>
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary" {{action 'save' this}} >Save changes</button>
+        <a href="#" class="btn btn-default pull-right">Cancel</a>
+      </div>
     </form>
   </script>
 
