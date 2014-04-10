@@ -54,14 +54,22 @@ App.RequestsDetailsRoute = Ember.Route.extend({
 
   model: function(params){
     return this.store.find('request', params.id);
-  },
+  }
+
+});
+
+App.RequestsDetailsController = Ember.ObjectController.extend({
+  newComment: null,
 
   actions: {
     'addComment': function(requestModel){
-      console.log('saving here');
-      // this.store.find('request', requestModel.get('id'))
-      //   .get('comments')
-      //   .pushObject();
+      var comment = this.store.createRecord('comment', {
+        comment: this.get('commentBody')
+      });
+
+      this.store.push('comment', comment);
+
+      this.set('newComment', null);
     }
   }
 

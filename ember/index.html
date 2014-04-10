@@ -173,7 +173,7 @@
       <div class="col-md-11">
         <form role="form">
           <div class="form-group">
-            {{textarea rows="3" class="form-control" placeholder="Enter comment"}}
+            {{view Ember.TextArea valueBinding="commentBody" placeholder="Enter your comment.." class="form-control"}}
           </div>
           <div>
             <button class="btn btn-default btn-warning pull-right" {{action 'addComment'this }}>Add comment</button>
