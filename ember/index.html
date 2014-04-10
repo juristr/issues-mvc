@@ -63,7 +63,9 @@
         <ul class="nav nav-pills nav-stacked">
           <li><a href="#">Assigned to me</a></li>
           <li><a href="#">Created by me</a></li>
-          <li><a href="#">All</a></li>
+          {{#linkTo "requests" tagName="li"}}
+            <a {{bindAttr href="view.href"}}>All</a>
+          {{/linkTo}}
         </ul>
         <fieldset>
           <legend>State</legend>

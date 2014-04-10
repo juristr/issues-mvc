@@ -5,6 +5,8 @@ App = Ember.Application.create({
 App.Router.map(function(){
     this.route('about');
     this.resource('requests', { path: '/requests' }, function(){
+      this.route('byme');
+      this.route('mine');
       this.route('details', { path: '/details/:id' });
       this.route('edit', { path: '/edit/:id' });
     });
