@@ -170,7 +170,9 @@
               <span>created by {{ author }}&nbsp;{{format-date "creationDate" }}</span>
               <span class="pull-right">
                 <a href="#" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                <a href="#" class="btn btn-xs btn-default"><i class="fa fa-times"></i></i></a>
+                <button class="btn btn-default btn-xs" {{action "removeComment" this }}>
+                  <i class="fa fa-times"></i>
+                </button>
               </span>
             </div>
             <div class="panel-body">

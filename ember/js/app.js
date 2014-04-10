@@ -77,6 +77,10 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
       requestModel.get('comments').addObject(comment);
 
       this.set('commentBody', '');
+    },
+
+    'removeComment': function(commentToRemove){
+      this.store.unloadRecord(commentToRemove);
     }
   }
 
