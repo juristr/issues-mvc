@@ -54,9 +54,20 @@
     </div>
   </script>
 
+  <script type="text/x-handlebars" data-template-name="requests/_new">
+    {{#link-to "requests.edit" class="btn btn-success"}}<i class="fa fa-plus"></i> New Request{{/link-to}}
+  </script>
+
   <script type="text/x-handlebars" data-template-name="requests/index">
     <h1>Requests</h1>
-    <p>All of your requests</p>
+    <div class="row">
+      <div class="col-md-12">
+        <span>All of your requests</span>
+        <div class="pull-right">
+          {{partial "requests/new"}}
+        </div>
+      </div>
+    </div>
     <hr/>
     <div class="row">
       <div class="col-md-3">
@@ -122,7 +133,7 @@
           {{#link-to "requests.index" class="btn btn-default"}}<i class="fa fa-long-arrow-left"></i> Back to list{{/link-to}}
         </div>
         <div class="pull-right">
-          <a href="#" class="btn btn-default"><i class="fa fa-plus"></i> New Request</a>
+          {{partial "requests/new"}}
           <a href="#" class="btn btn-default">Archive</a>
           {{#link-to "requests.edit" this class="btn btn-default"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
         </div>
@@ -182,7 +193,7 @@
             {{view Ember.TextArea valueBinding="commentBody" placeholder="Enter your comment.." class="form-control"}}
           </div>
           <div>
-            <button class="btn btn-default btn-warning pull-right" {{action 'addComment'this }}>Add comment</button>
+            <button class="btn btn-default btn-success pull-right" {{action 'addComment'this }}>Add comment</button>
           </div>
         </form>
       </div>
