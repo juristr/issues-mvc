@@ -19,6 +19,11 @@ ul.well-list {
     list-style: none;
 }
 
+.well-list li:hover {
+    background: #d9edf7;
+    border-bottom: 1px solid #ADF;
+}
+
 .well-list li {
     padding: 10px;
     min-height: 20px;

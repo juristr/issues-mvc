@@ -93,7 +93,7 @@
     <li class="issue">
       <div class="issue-title">
         <span class="str-truncated">
-          {{ title }}
+          {{#link-to "requests.details" this }} {{ title }} {{/link-to}}
         </span>
       </div>
       <div class="issue-info">
@@ -102,23 +102,48 @@
           <i class="fa fa-comments"></i>1
         </span>
         <div class="pull-right">
-          <small>updated <time class="issue_update_ago" data-placement="bottom" data-toggle="tooltip" datetime="2014-04-07T08:32:15Z" title="" data-original-title="Apr 07, 2014 8:32am">3 days ago</time>
+          <small>updated <time class="issue_update_ago" data-placement="bottom" data-toggle="tooltip">{{format-date "creationDate" }}</time>
           </small>
         </div>
       </div>
       <div class="issue-actions">
-        <a href="#" class="btn btn-xs btn-default"><i class="fa fa-pencil-square-o"></i> Edit</a>
-        <a href="#" class="btn btn-xs btn-danger">Delete</a>
+        <a href="#" class="btn btn-default btn-xs">Archive</a>
+        {{#link-to "requests.edit" class="btn btn-default btn-xs"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
       </div>
     </li>
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/details">
-    <h2>{{ title }}</h2>
-    <p>
-      {{ description }}
-    </p>
-    {{#link-to 'requests.edit' this class="btn btn-primary" }}Edit{{/link-to}}
+    <div class="row">
+      <div class="col-md-12">
+        <div class="pull-left">
+          {{#link-to "requests.index" class="btn btn-default"}}<i class="fa fa-long-arrow-left"></i> Back to list{{/link-to}}
+        </div>
+        <div class="pull-right">
+          <a href="#" class="btn btn-default"><i class="fa fa-plus"></i> New Request</a>
+          <a href="#" class="btn btn-default">Archive</a>
+          {{#link-to "requests.edit" class="btn btn-default"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
+        </div>
+      </div>
+    </div>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <span class="label label-default">{{ status }}</span>
+            <span>created by {{ author }}</span>
+            <span class="pull-right">{{format-date "creationDate" }}</span>
+          </div>
+          <div class="panel-body">
+            <h2>{{ title }}</h2>
+            <p>
+              {{ description }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/edit">
@@ -146,6 +171,7 @@
   <script src="js/libs/handlebars-1.1.2.js"></script>
   <script src="js/libs/ember-1.4.0.js"></script>
   <script src="js/libs/ember-data.js"></script>
+  <script src="js/libs/moment.min.js"></script>
   <script src="js/app.js"></script>
   <!-- to activate the test runner, add the "?test" query string parameter -->
   <script src="tests/runner.js"></script>
