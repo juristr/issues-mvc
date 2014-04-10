@@ -144,6 +144,43 @@
         </div>
       </div>
     </div>
+    <hr>
+    <!-- comments -->
+    {{#each comments}}
+      <div class="row">
+        <div class="col-md-1">
+          <img alt="Juri Strumpflohner" class="timeline-comment-avatar js-avatar" data-user="542458" height="48" src="https://avatars2.githubusercontent.com/u/542458?s=140" width="48">
+        </div>
+        <div class="col-md-11">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <span>created by {{ author }}</span>
+              <span class="pull-right">{{format-date "creationDate" }}</span>
+            </div>
+            <div class="panel-body">
+              <p>
+                {{ comment }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+    <div class="row">
+      <div class="col-md-1">
+        <img alt="Juri Strumpflohner" class="timeline-comment-avatar js-avatar" height="48" src="https://avatars2.githubusercontent.com/u/542458?s=140" width="48">
+      </div>
+      <div class="col-md-11">
+        <form role="form">
+          <div class="form-group">
+            {{textarea rows="3" class="form-control" placeholder="Enter comment"}}
+          </div>
+          <div>
+            <button class="btn btn-default btn-warning pull-right" {{action 'addComment'this }}>Add comment</button>
+          </div>
+        </form>
+      </div>
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/edit">
@@ -165,7 +202,7 @@
     </form>
   </script>
 
-  <script type="text/x-handlebars" data-template-name="requests/loading">
+  <script type="text/x-handlebars" data-template-name="loading">
     <p>Loading your links...</p>
   </script>
 

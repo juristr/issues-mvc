@@ -10,7 +10,7 @@ App.Router.map(function(){
     });
 });
 
-App.Store = DS.Store.extend({
+App.ApplicationStore = DS.Store.extend({
     revision: 12,
     // Says we are specifying all models in js
     adapter: DS.FixtureAdapter
@@ -22,7 +22,14 @@ App.Request = DS.Model.extend({
   creationDate: DS.attr('date'),
   lastUpdated: DS.attr('data'),
   status: DS.attr('string'),
-  author: DS.attr('string')
+  author: DS.attr('string'),
+  comments: DS.hasMany('comment', {async:true})
+});
+
+App.Comment = DS.Model.extend({
+  comment: DS.attr('string'),
+  author: DS.attr('string'),
+  creationDate: DS.attr('date')
 });
 
 App.RequestsIndexRoute = Ember.Route.extend({
@@ -47,35 +54,18 @@ App.RequestsDetailsRoute = Ember.Route.extend({
 
   model: function(params){
     return this.store.find('request', params.id);
+  },
+
+  actions: {
+    'addComment': function(requestModel){
+      console.log('saving here');
+      // this.store.find('request', requestModel.get('id'))
+      //   .get('comments')
+      //   .pushObject();
+    }
   }
 
 });
-
-/*
-App.FavlinksIndexRoute = Ember.Route.extend({
-    model: function(params){
-      return this.store.find('favlink');
-      //return $.getJSON('./data/links.json');
-    }
-});
-
-App.FavlinksDetailsRoute = Ember.Route.extend({
-    model: function(params){
-      return this.store.find('favlink', params.id);
-    }
-});
-
-App.FavlinksEditRoute = Ember.Route.extend({
-    model: function(params){
-      return this.store.find('favlink', params.id);
-    },
-    actions: {
-      save: function(modelToSave){
-        this.store.push('favlink', modelToSave);
-      }
-    }
-});
-*/
 
 Ember.Handlebars.helper('format-date', function(date) {
   return moment(date).fromNow();
@@ -88,7 +78,8 @@ App.Request.FIXTURES = [
       "description": "Sample description",
       "status": "Open",
       "creationDate": "2014-04-10T15:00:00Z",
-      "author": "Juri"
+      "author": "Juri",
+      "comments": [1]
   },
   {
       "id": 2,
@@ -96,6 +87,22 @@ App.Request.FIXTURES = [
       "description": "My personal website and blog",
       "status": "Doing",
       "creationDate": "2014-03-20T10:00:00Z",
-      "author": "Christoph"
+      "author": "Christoph",
+      "comments": [2]
+  }
+];
+
+App.Comment.FIXTURES = [
+  {
+    "id": 1,
+    "comment": "the comment",
+    "author": "Juri",
+    "creationDate": "2014-04-10T15:00:00Z"
+  },
+  {
+    "id": 2,
+    "comment": "another comment",
+    "author": "Juri",
+    "creationDate": "2014-04-10T15:00:00Z"
   }
 ];
