@@ -90,7 +90,7 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/_listentry">
-    <li class="issue">
+    <li class="issue" {{action "redirectDetail" this }}>
       <div class="issue-title">
         <span class="str-truncated">
           {{#link-to "requests.details" this }} {{ title }} {{/link-to}}

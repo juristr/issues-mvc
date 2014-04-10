@@ -28,6 +28,11 @@ App.Request = DS.Model.extend({
 App.RequestsIndexRoute = Ember.Route.extend({
   model: function(){
     return this.store.find('request');
+  },
+  actions: {
+    'redirectDetail': function(selectedModel){
+      this.transitionTo('requests/details', selectedModel);
+    }
   }
 });
 
