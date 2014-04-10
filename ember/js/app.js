@@ -24,8 +24,8 @@ App.Request = DS.Model.extend({
   description: DS.attr('string'),
   creationDate: DS.attr('date'),
   lastUpdated: DS.attr('data'),
-  status: DS.attr('string', { default: 'open' }),
-  author: DS.attr('string'),
+  status: DS.attr('string', { defaultValue: 'Open' }),
+  author: DS.attr('string', { defaultValue: 'Juri' }),
   owner: DS.attr('string'),
   comments: DS.hasMany('comment', {async:true})
 });
