@@ -83,8 +83,8 @@ Ember.Handlebars.helper('format-date', function(date) {
 App.Request.FIXTURES = [
   {
       "id": 1,
-      "title": "StackOverflow",
-      "description": "Sample description",
+      "title": "Forum für Bürgeranliegen",
+      "description": "Es wäre interessant wenn ich als Bürger die Möglichkeit hätte in einem Forum meine Anliegen anzuführen bzw. Hilfestellung bekommen kann.",
       "status": "Open",
       "creationDate": "2014-04-10T15:00:00Z",
       "author": "Juri",
@@ -93,8 +93,8 @@ App.Request.FIXTURES = [
   },
   {
       "id": 2,
-      "title": "My website",
-      "description": "My personal website and blog",
+      "title": "Login mit Facebook",
+      "description": "Ich möchte mich auch mit meinem Facebook Account authentifizieren können!",
       "status": "Doing",
       "creationDate": "2014-03-20T10:00:00Z",
       "author": "Juri",
