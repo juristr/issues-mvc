@@ -9,6 +9,7 @@ App.Router.map(function(){
       this.route('mine');
       this.route('details', { path: '/details/:id' });
       this.route('edit', { path: '/edit/:id' });
+      this.route('create', { path: '/create' });
     });
 });
 
@@ -23,7 +24,7 @@ App.Request = DS.Model.extend({
   description: DS.attr('string'),
   creationDate: DS.attr('date'),
   lastUpdated: DS.attr('data'),
-  status: DS.attr('string'),
+  status: DS.attr('string', { default: 'open' }),
   author: DS.attr('string'),
   owner: DS.attr('string'),
   comments: DS.hasMany('comment', {async:true})
@@ -42,13 +43,46 @@ App.RequestsIndexRoute = Ember.Route.extend({
 });
 
 App.RequestsEditRoute = Ember.Route.extend({
+
   model: function(params){
     return this.store.find('request', params.id);
   },
+
   actions: {
     'save': function(model){
       this.store.push('request', model);
       this.transitionTo('requests.details', model);
+    }
+  }
+});
+
+App.RequestsCreateRoute = Ember.Route.extend({
+  renderTemplate: function(){
+    this.render('requests.edit');
+  },
+
+  model: function(){
+    return this.store.createRecord('request');
+  }
+
+});
+
+App.RequestsCreateController = Ember.ObjectController.extend({
+  actions: {
+    'save': function(modelToSave){
+      var self = this;
+
+      var model = modelToSave; //this.get('model');
+
+      model.save(); // throws error...no clue why
+
+      self.transitionTo('requests.index');
+
+    },
+
+    'cancel': function(){
+      this.get('model').rollback();
+      this.transitionTo('requests.index');
     }
   }
 });

@@ -55,7 +55,7 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/_new">
-    {{#link-to "requests.edit" class="btn btn-success"}}<i class="fa fa-plus"></i> New Request{{/link-to}}
+    {{#link-to "requests.create" class="btn btn-success"}}<i class="fa fa-plus"></i> New Request{{/link-to}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/index">
@@ -216,7 +216,7 @@
       <hr>
       <div class="form-actions">
         <button type="submit" class="btn btn-primary" {{action 'save' this}} >Save changes</button>
-        <a href="#" class="btn btn-default pull-right">Cancel</a>
+        <button type="submit" class="btn btn-default pull-right" {{action 'cancel' }} >Cancel</button>
       </div>
     </form>
   </script>
