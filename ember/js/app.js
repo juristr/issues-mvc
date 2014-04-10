@@ -46,15 +46,20 @@ App.RequestsEditRoute = Ember.Route.extend({
 
   model: function(params){
     return this.store.find('request', params.id);
-  },
+  }
 
+});
+
+App.RequestsEditController = Ember.ObjectController.extend({
   actions: {
-    'save': function(model){
-      this.store.push('request', model);
-      this.transitionTo('requests.details', model);
+    'save': function(){
+      this.get('model').save();
+
+      //this.store.push('request', model);
+      //this.transitionTo('requests.details', model);
     }
   }
-});
+})
 
 App.RequestsCreateRoute = Ember.Route.extend({
   renderTemplate: function(){
@@ -120,9 +125,19 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
 
 });
 
+/* Handlebars helpers */
+
+var showdown = new Showdown.converter();
+
+Ember.Handlebars.helper('format-markdown', function(input) {
+  return new Handlebars.SafeString(showdown.makeHtml(input));
+});
+
 Ember.Handlebars.helper('format-date', function(date) {
   return moment(date).fromNow();
 });
+
+/* Fixture data */
 
 App.Request.FIXTURES = [
   {
