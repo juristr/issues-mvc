@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Customer Relations</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <!--
+  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+  -->
+  <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+  <script type="text/x-handlebars" data-template-name="application">
+    <div class="container">
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Customer Relations</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>{{#link-to 'index'}}Home{{/link-to}}</li>
+                        <li>{{#link-to 'requests'}}Requests{{/link-to}}</li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div><!--/.container-fluid -->
+        </div>
+
+        {{outlet}}
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="index">
+    <div class="jumbotron">
+      <h1>
+        Customer Relations
+      </h1>
+      <p>
+          Demo application for handling customer requests.
+      </p>
+      <p>
+          {{#link-to 'requests' class="btn btn-primary"}}Open current requests{{/link-to}}
+      </p>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="requests/index">
+    <h1>Requests</h1>
+    <p>All of your requests</p>
+    <hr/>
+    <div class="row">
+      <div class="col-md-3">
+        <ul class="nav nav-pills nav-stacked">
+          <li><a href="#">Assigned to me</a></li>
+          <li><a href="#">Created by me</a></li>
+          <li><a href="#">All</a></li>
+        </ul>
+        <fieldset>
+          <legend>State</legend>
+          <ul class="nav nav-pills">
+            <li><a href="#">Open</a></li>
+            <li><a href="#">Doing</a></li>
+            <li><a href="#">Done</a></li>
+          </ul>
+        </fieldset>
+      </div>
+      <div class="col-md-9">
+          <div class="panel panel-default">
+            <div class="panel-heading">All Requests</div>
+            <div class="panel-body" style="padding:0">
+              <ul class="well-list issues-list">
+                {{#each}}
+                  {{partial "requests/listentry"}}
+                {{/each}}
+              </ul>
+            </div>
+          </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="requests/_listentry">
+    <li class="issue">
+      <div class="issue-title">
+        <span class="str-truncated">
+          {{ title }}
+        </span>
+      </div>
+      <div class="issue-info">
+        assigned to <a class="author_link" href="/u/juri.strumpflohner"><span class="author">{{ author }}</span></a>
+        <span>
+          <i class="fa fa-comments"></i>1
+        </span>
+        <div class="pull-right">
+          <small>updated <time class="issue_update_ago" data-placement="bottom" data-toggle="tooltip" datetime="2014-04-07T08:32:15Z" title="" data-original-title="Apr 07, 2014 8:32am">3 days ago</time>
+          </small>
+        </div>
+      </div>
+      <div class="issue-actions">
+        <a href="#" class="btn btn-xs btn-default"><i class="fa fa-pencil-square-o"></i> Edit</a>
+        <a href="#" class="btn btn-xs btn-danger">Delete</a>
+      </div>
+    </li>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="requests/details">
+    <h2>{{ title }}</h2>
+    <p>
+      {{ description }}
+    </p>
+    {{#link-to 'requests.edit' this class="btn btn-primary" }}Edit{{/link-to}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="requests/edit">
+    <h2>Editing {{ title }}</h2>
+    <form role="form">
+      <div class="form-group">
+        <label>Title</label>
+        {{input type="text" value=title class="form-control" placeholder="Enter title"}}
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        {{input type="text" value=description class="form-control" placeholder="Enter description"}}
+      </div>
+      <button type="submit" class="btn btn-default" {{action 'save' this}} >Submit</button>
+    </form>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="requests/loading">
+    <p>Loading your links...</p>
+  </script>
+
+
+  <script src="js/libs/jquery-1.10.2.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="js/libs/handlebars-1.1.2.js"></script>
+  <script src="js/libs/ember-1.4.0.js"></script>
+  <script src="js/libs/ember-data.js"></script>
+  <script src="js/app.js"></script>
+  <!-- to activate the test runner, add the "?test" query string parameter -->
+  <script src="tests/runner.js"></script>
+</body>
+</html>
