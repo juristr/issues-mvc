@@ -23,6 +23,7 @@ App.Request = DS.Model.extend({
   lastUpdated: DS.attr('data'),
   status: DS.attr('string'),
   author: DS.attr('string'),
+  owner: DS.attr('string'),
   comments: DS.hasMany('comment', {async:true})
 });
 
@@ -87,6 +88,7 @@ App.Request.FIXTURES = [
       "status": "Open",
       "creationDate": "2014-04-10T15:00:00Z",
       "author": "Juri",
+      "owner": "",
       "comments": [1]
   },
   {
@@ -95,7 +97,8 @@ App.Request.FIXTURES = [
       "description": "My personal website and blog",
       "status": "Doing",
       "creationDate": "2014-03-20T10:00:00Z",
-      "author": "Christoph",
+      "author": "Juri",
+      "owner": "Christoph",
       "comments": [2]
   }
 ];
