@@ -62,7 +62,7 @@ App.RequestsDetailsRoute = Ember.Route.extend({
 });
 
 App.RequestsDetailsController = Ember.ObjectController.extend({
-  newComment: null,
+  commentBody: null,
 
   actions: {
     'addComment': function(requestModel){
@@ -70,9 +70,13 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
         comment: this.get('commentBody')
       });
 
-      this.store.push('comment', comment);
+      // this.store.find('request', requestModel.get('id'))
+      //   .get('comments')
+      //   .addObject(comment);
 
-      this.set('newComment', null);
+      requestModel.get('comments').addObject(comment);
+
+      this.set('commentBody', '');
     }
   }
 
