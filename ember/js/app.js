@@ -108,6 +108,8 @@ App.RequestsDetailsRoute = Ember.Route.extend({
 App.RequestsDetailsController = Ember.ObjectController.extend({
   commentBody: null,
 
+  isOpen: Ember.computed.equal('status', 'open'),
+
   actions: {
     'addComment': function(){
       var self = this;
@@ -138,11 +140,11 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
 
     'close': function(){
       var model = this.get('model');
-      model.set('status', 'Closed');
+      model.set('status', 'closed');
 
       var self = this;
       var comment = this.store.createRecord('comment', {
-        comment: 'Closed',
+        comment: 'closed',
         author: 'Juri',
         systemLog: true,
         lastUpdated: new Date()
@@ -156,8 +158,28 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
             self.set('commentBody', '');
           });
       });
+    },
 
+    'reopen': function(){
+      var model = this.get('model');
+      model.set('status', 'open');
 
+      var self = this;
+      var comment = this.store.createRecord('comment', {
+        comment: 'open',
+        author: 'Juri',
+        systemLog: true,
+        lastUpdated: new Date()
+      });
+
+      comment.save().then(function(){
+        model.get('comments').then(function(commentList){
+            commentList.addObject(comment);
+            model.save();
+
+            self.set('commentBody', '');
+          });
+      });
     }
   }
 
