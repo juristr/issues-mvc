@@ -131,7 +131,10 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
     },
 
     'removeComment': function(commentToRemove){
-      this.store.unloadRecord(commentToRemove);
+      commentToRemove.deleteRecord();
+
+      // strangely I have to do this as well
+      this.get('model').save();
     }
   }
 
@@ -153,8 +156,8 @@ App.Request = DS.Model.extend({
 App.Comment = DS.Model.extend({
   comment: DS.attr('string'),
   author: DS.attr('string'),
-  lastUpdated: DS.attr('date')
-  // request: DS.belongsTo('request')
+  lastUpdated: DS.attr('date'),
+  request: DS.belongsTo('request', {async:true})
 });
 
 
