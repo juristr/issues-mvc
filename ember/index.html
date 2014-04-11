@@ -98,9 +98,15 @@
             <div class="panel-heading">All Requests</div>
             <div class="panel-body" style="padding:0">
               <ul class="well-list issues-list">
-                {{#each}}
-                  {{partial "requests/listentry"}}
-                {{/each}}
+                {{#if this.length}}
+                  {{#each}}
+                    {{partial "requests/listentry"}}
+                  {{/each}}
+                {{else}}
+                  <li>
+                    Oops, nothing to show here. Do you want to {{#link-to "requests.create"}}add{{/link-to}} a new one??
+                  </li>
+                {{/if}}
               </ul>
             </div>
           </div>
@@ -245,6 +251,7 @@
   <script src="bower_components/handlebars/handlebars.min.js"></script>
   <script src="bower_components/ember/ember.js"></script>
   <script src="bower_components/ember-data/ember-data.js"></script>
+  <script src="bower_components/ember-localstorage-adapter/localstorage_adapter.js"></script>
   <script src="js/libs/moment.min.js"></script>
   <script src="js/libs/showdown.js"></script>
   <script src="js/app.js"></script>

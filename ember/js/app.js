@@ -12,11 +12,15 @@ App.Router.map(function(){
     });
 });
 
-App.ApplicationStore = DS.Store.extend({
-    revision: 12,
-    // Says we are specifying all models in js
-    adapter: DS.FixtureAdapter
+App.ApplicationAdapter = DS.LSAdapter.extend({
+  namespace: 'requests-emberjs'
 });
+
+// App.ApplicationStore = DS.Store.extend({
+//     revision: 12,
+//     // Says we are specifying all models in js
+//     adapter: DS.FixtureAdapter
+// });
 
 App.RequestsIndexRoute = Ember.Route.extend({
   model: function(){
@@ -63,6 +67,17 @@ App.RequestsCreateRoute = Ember.Route.extend({
 
   model: function(){
     return this.store.createRecord('request');
+  },
+
+  actions: {
+    'save': function(){
+      var model = this.get('model');
+
+      model.save();
+
+      //this.store.push('request', model);
+      this.transitionTo('requests.details', model);
+    }
   }
 
 });
@@ -104,11 +119,8 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
         comment: this.get('commentBody')
       });
 
-      // this.store.find('request', requestModel.get('id'))
-      //   .get('comments')
-      //   .addObject(comment);
-
       requestModel.get('comments').addObject(comment);
+      comment.save();
 
       this.set('commentBody', '');
     },
