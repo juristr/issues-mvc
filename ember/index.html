@@ -127,6 +127,7 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/details">
+
     <div class="row">
       <div class="col-md-12">
         <div class="pull-left">
@@ -140,16 +141,23 @@
       </div>
     </div>
     <hr>
+    <h2>{{ title }}</h2>
+    <div class="row col-md-12 request-header-meta">
+      <div class="request-header-status">
+        <span class="label label-warning"><i class="fa fa-info-circle"></i> {{ status }}</span>
+      </div>
+      <span class="author">{{ author }}</span>
+      opened this request {{format-date "creationDate" }}
+         · {{ comments.length }} comment
+      </div>
+    </div>
     <div class="row">
       <div class="col-md-12">
         <div class="panel panel-default">
           <div class="panel-heading">
-            <span class="label label-default">{{ status }}</span>
-            <span>created by {{ author }}</span>
-            <span class="pull-right">{{format-date "creationDate" }}</span>
+            <span>created by {{ author }}&nbsp;{{format-date "creationDate" }}</span>
           </div>
           <div class="panel-body">
-            <h2>{{ title }}</h2>
             <p>
               {{format-markdown description }}
             </p>

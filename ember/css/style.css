@@ -58,3 +58,29 @@ small, .small {
     white-space: nowrap;
     max-width: 82%;
 }
+
+.request-header-meta {
+    margin-top: 9px;
+    font-size: 14px;
+    line-height: 28px;
+    color: #777;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.request-header-status {
+    position: relative;
+    float: left;
+    padding: 4px 8px;
+    margin-right: 8px;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 20px;
+    color: #fff;
+    border-radius: 3px;
+}
+
+.request-header-meta .author {
+    color: #555;
+    font-weight: bold;
+}
