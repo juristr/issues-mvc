@@ -53,10 +53,10 @@ App.RequestsEditController = Ember.ObjectController.extend({
       var model = this.get('model');
       model.set('lastUpdated', new Date());
 
-      model.save();
+      model.save().then(function(){
+        this.transitionTo('requests.details', model);
+      });
 
-      //this.store.push('request', model);
-      this.transitionTo('requests.details', model);
     }
   }
 });
