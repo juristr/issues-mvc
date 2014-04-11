@@ -61,44 +61,42 @@ App.RequestsEditController = Ember.ObjectController.extend({
 });
 
 App.RequestsCreateRoute = Ember.Route.extend({
-  renderTemplate: function(){
-    this.render('requests.edit');
-  },
 
   model: function(){
     return this.store.createRecord('request');
   },
 
-  actions: {
-    'save': function(){
-      var model = this.get('model');
-
-      model.save();
-
-      //this.store.push('request', model);
-      this.transitionTo('requests.details', model);
-    }
+  renderTemplate: function(){
+    this.render('requests.edit', {
+      controller: 'requestsCreate'
+    });
   }
 
 });
 
 App.RequestsCreateController = Ember.ObjectController.extend({
   actions: {
-    'save': function(modelToSave){
+    'save': function(){
       var self = this;
 
-      var model = modelToSave; //this.get('model');
+      var model = this.get('model');
 
-      model.save(); // throws error...no clue why
+      model.set('owner', 'Juri');
+      model.set('creationDate', new Date());
+
+      model.save().then(function(){
+
+      });
 
       self.transitionTo('requests.index');
 
-    },
-
-    'cancel': function(){
-      this.get('model').rollback();
-      this.transitionTo('requests.index');
     }
+    // ,
+
+    // 'cancel': function(){
+    //   this.get('model').rollback();
+    //   this.transitionTo('requests.index');
+    // }
   }
 });
 
@@ -115,15 +113,19 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
 
   actions: {
     'addComment': function(){
+      var self = this;
       var comment = this.store.createRecord('comment', {
         comment: this.get('commentBody')
       });
 
-      var model = this.get('model');
-      model.get('comments').addObject(comment);
-      model.save();
+      var model = self.get('model');
+      model.get('comments').then(function(commentList){
+        commentList.addObject(comment);
+        model.save();
 
-      this.set('commentBody', '');
+        self.set('commentBody', '');
+      });
+
     },
 
     'removeComment': function(commentToRemove){
