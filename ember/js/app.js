@@ -25,12 +25,47 @@ App.ApplicationAdapter = DS.LSAdapter.extend({
 //     adapter: DS.FixtureAdapter
 // });
 
-App.RequestsIndexRoute = Ember.Route.extend({
+App.RequestsRoute = Ember.Route.extend({
+  afterModel: function() {
+    this.transitionTo('requests.open');
+  },
+  
   model: function(){
     return this.store.find('request');
+  }
+});
+
+App.RequestsIndexRoute = Ember.Route.extend({
+  setupController: function(controller, model){
+    controller.set('model', model);
+  }
+});
+
+App.RequestsOpenRoute = Ember.Route.extend({
+  setupController: function(controller, model){
+    var filteredData = this.store.filter('request', function(request){
+      return request.get('status') === 'open';
+    });
+
+    controller.set('model', filteredData);
   },
-  setupController: function(){
-    this.controllerFor('requests').set('filteredRequests', this.modelFor('requests'));
+
+  renderTemplate: function(){
+    this.render('requests.index');
+  }
+});
+
+App.RequestsClosedRoute = Ember.Route.extend({
+  setupController: function(controller, model){
+    var filteredData = this.store.filter('request', function(request){
+      return request.get('status') !== 'open';
+    });
+
+    controller.set('model', filteredData);
+  },
+
+  renderTemplate: function(){
+    this.render('requests.index');
   }
 });
 
@@ -44,9 +79,9 @@ App.RequestsIndexRoute = Ember.Route.extend({
 
 // });
 
-App.RequestsController = Ember.ArrayController.extend({
-
-});
+// App.RequestsController = Ember.ArrayController.extend({
+//
+// });
 
 // App.RequestsFilterRoute = Ember.Route.extend({
 
@@ -211,7 +246,7 @@ App.Request = DS.Model.extend({
   description: DS.attr('string'),
   creationDate: DS.attr('date'),
   lastUpdated: DS.attr('date'),
-  status: DS.attr('string', { defaultValue: 'Open' }),
+  status: DS.attr('string', { defaultValue: 'open' }),
   author: DS.attr('string', { defaultValue: 'Juri' }),
   owner: DS.attr('string'),
   comments: DS.hasMany('comment', {async:true})
