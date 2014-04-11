@@ -23,7 +23,7 @@ App.Request = DS.Model.extend({
   title: DS.attr('string'),
   description: DS.attr('string'),
   creationDate: DS.attr('date'),
-  lastUpdated: DS.attr('data'),
+  lastUpdated: DS.attr('date'),
   status: DS.attr('string', { defaultValue: 'Open' }),
   author: DS.attr('string', { defaultValue: 'Juri' }),
   owner: DS.attr('string'),
@@ -53,13 +53,15 @@ App.RequestsEditRoute = Ember.Route.extend({
 App.RequestsEditController = Ember.ObjectController.extend({
   actions: {
     'save': function(){
-      this.get('model').save();
+      var model = this.get('model');
+
+      model.save();
 
       //this.store.push('request', model);
-      //this.transitionTo('requests.details', model);
+      this.transitionTo('requests.details', model);
     }
   }
-})
+});
 
 App.RequestsCreateRoute = Ember.Route.extend({
   renderTemplate: function(){
