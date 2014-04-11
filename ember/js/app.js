@@ -29,15 +29,9 @@ App.RequestsRoute = Ember.Route.extend({
   afterModel: function() {
     this.transitionTo('requests.open');
   },
-  
+
   model: function(){
     return this.store.find('request');
-  }
-});
-
-App.RequestsIndexRoute = Ember.Route.extend({
-  setupController: function(controller, model){
-    controller.set('model', model);
   }
 });
 
