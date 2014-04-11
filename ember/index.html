@@ -80,11 +80,17 @@
         </ul>
         <fieldset>
           <legend>State</legend>
-          <ul class="nav nav-pills">
-            <li><a href="#">Open</a></li>
-            <li><a href="#">Doing</a></li>
-            <li><a href="#">Done</a></li>
-          </ul>
+          <div class="btn-group" data-toggle="buttons">
+            <label class="btn btn-primary">
+              <input type="radio" name="options" id="option1" checked> Open
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="options" id="option2"> Doing
+            </label>
+            <label class="btn btn-primary">
+              <input type="radio" name="options" id="option3"> Done
+            </label>
+          </div>
         </fieldset>
       </div>
       <div class="col-md-9">

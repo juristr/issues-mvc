@@ -4,9 +4,8 @@ App = Ember.Application.create({
 
 App.Router.map(function(){
     this.route('about');
-    this.resource('requests', { path: '/requests' }, function(){
-      this.route('byme');
-      this.route('mine');
+    this.resource('requests', function(){
+      this.route('filter', { path: '/filter/:status'});
       this.route('details', { path: '/details/:id' });
       this.route('edit', { path: '/edit/:id' });
       this.route('create', { path: '/create' });
@@ -19,26 +18,20 @@ App.ApplicationStore = DS.Store.extend({
     adapter: DS.FixtureAdapter
 });
 
-App.Request = DS.Model.extend({
-  title: DS.attr('string'),
-  description: DS.attr('string'),
-  creationDate: DS.attr('date'),
-  lastUpdated: DS.attr('date'),
-  status: DS.attr('string', { defaultValue: 'Open' }),
-  author: DS.attr('string', { defaultValue: 'Juri' }),
-  owner: DS.attr('string'),
-  comments: DS.hasMany('comment', {async:true})
-});
-
-App.Comment = DS.Model.extend({
-  comment: DS.attr('string'),
-  author: DS.attr('string'),
-  creationDate: DS.attr('date')
-});
-
 App.RequestsIndexRoute = Ember.Route.extend({
   model: function(){
     return this.store.find('request');
+  }
+});
+
+App.RequestsFilterRoute = Ember.Route.extend({
+
+  renderTemplate: function(){
+    this.render('requests.edit');
+  },
+
+  model: function(filter){
+    return this.store.find('request', { status: filter.status });
   }
 });
 
@@ -127,6 +120,26 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
 
 });
 
+/* Model definitions */
+
+App.Request = DS.Model.extend({
+  title: DS.attr('string'),
+  description: DS.attr('string'),
+  creationDate: DS.attr('date'),
+  lastUpdated: DS.attr('date'),
+  status: DS.attr('string', { defaultValue: 'Open' }),
+  author: DS.attr('string', { defaultValue: 'Juri' }),
+  owner: DS.attr('string'),
+  comments: DS.hasMany('comment', {async:true})
+});
+
+App.Comment = DS.Model.extend({
+  comment: DS.attr('string'),
+  author: DS.attr('string'),
+  creationDate: DS.attr('date')
+});
+
+
 /* Handlebars helpers */
 
 var showdown = new Showdown.converter();
@@ -151,6 +164,15 @@ App.Request.FIXTURES = [
       "author": "Juri",
       "owner": "",
       "comments": [1]
+  },
+  {
+      "id": 3,
+      "title": "Another requirement",
+      "description": "A finished requirement...",
+      "status": "Done",
+      "creationDate": "2014-03-20T10:00:00Z",
+      "author": "Juri",
+      "owner": "Juri"
   },
   {
       "id": 2,
