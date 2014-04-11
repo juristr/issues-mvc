@@ -114,13 +114,15 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
   commentBody: null,
 
   actions: {
-    'addComment': function(requestModel){
+    'addComment': function(){
       var comment = this.store.createRecord('comment', {
         comment: this.get('commentBody')
       });
 
-      requestModel.get('comments').addObject(comment);
-      comment.save();
+      var model = this.get('model');
+
+      model.get('comments').addObject(comment);
+      model.save();
 
       this.set('commentBody', '');
     },
