@@ -32,7 +32,7 @@ App.RequestsIndexRoute = Ember.Route.extend({
 App.RequestsFilterRoute = Ember.Route.extend({
 
   renderTemplate: function(){
-    this.render('requests.edit');
+    this.render('requests.index');
   },
 
   model: function(filter){
@@ -59,7 +59,6 @@ App.RequestsEditController = Ember.ObjectController.extend({
       model.save().then(function(){
         self.transitionTo('requests.details', model);
       });
-
     }
   }
 });
@@ -135,6 +134,30 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
 
       // strangely I have to do this as well
       this.get('model').save();
+    },
+
+    'close': function(){
+      var model = this.get('model');
+      model.set('status', 'Closed');
+
+      var self = this;
+      var comment = this.store.createRecord('comment', {
+        comment: 'Closed',
+        author: 'Juri',
+        systemLog: true,
+        lastUpdated: new Date()
+      });
+
+      comment.save().then(function(){
+        model.get('comments').then(function(commentList){
+            commentList.addObject(comment);
+            model.save();
+
+            self.set('commentBody', '');
+          });
+      });
+
+
     }
   }
 
@@ -157,6 +180,7 @@ App.Comment = DS.Model.extend({
   comment: DS.attr('string'),
   author: DS.attr('string'),
   lastUpdated: DS.attr('date'),
+  systemLog: DS.attr('boolean', { defaultValue: false }),
   request: DS.belongsTo('request', {async:true})
 });
 

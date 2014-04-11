@@ -92,7 +92,11 @@ small, .small {
     border-radius: 3px;
 }
 
-.request-header-meta .author {
+.meta-info {
+    color: #777;
+}
+
+.author {
     color: #555;
     font-weight: bold;
 }
