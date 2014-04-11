@@ -50,11 +50,13 @@ App.RequestsEditRoute = Ember.Route.extend({
 App.RequestsEditController = Ember.ObjectController.extend({
   actions: {
     'save': function(){
+      var self = this;
+
       var model = this.get('model');
       model.set('lastUpdated', new Date());
 
       model.save().then(function(){
-        this.transitionTo('requests.details', model);
+        self.transitionTo('requests.details', model);
       });
 
     }
