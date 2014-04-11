@@ -51,6 +51,7 @@ App.RequestsEditController = Ember.ObjectController.extend({
   actions: {
     'save': function(){
       var model = this.get('model');
+      model.set('lastUpdated', new Date());
 
       model.save();
 
@@ -83,6 +84,7 @@ App.RequestsCreateController = Ember.ObjectController.extend({
 
       model.set('owner', 'Juri');
       model.set('creationDate', new Date());
+      model.set('lastUpdated', new Date());
 
       model.save().then(function(){
         self.transitionTo('requests.index');
