@@ -3,6 +3,18 @@
     margin: 20px;
 }
 
+/* bootstrap overrides */
+
+.btn {
+  font-weight:bold;
+}
+
+/* request list */
+
+.request-filter-actions{
+  padding-bottom:10px;
+}
+
 .issues-list .issue {
     padding: 10px;
     position: relative;

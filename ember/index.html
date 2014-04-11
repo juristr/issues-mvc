@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <title>Customer Requests</title>
   <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">  
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
   <!--
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
   -->
@@ -78,13 +78,13 @@
             <a {{bindAttr href="view.href"}}>All</a>
           {{/linkTo}}
         </ul>
-        <fieldset>
-          <legend>State</legend>
-          {{#link-to "requests.open" class="btn btn-default" }}Open{{/link-to}}
-          {{#link-to "requests.closed" class="btn btn-default" }}Closed{{/link-to}}
-        </fieldset>
       </div>
       <div class="col-md-9">
+        <div class="row request-filter-actions">
+          {{#link-to "requests.open" class="btn btn-default btn-sm" }}Open{{/link-to}}
+          {{#link-to "requests.closed" class="btn btn-default btn-sm" }}Closed{{/link-to}}
+        </div>
+        <div class="row">
           <div class="panel panel-default">
             <div class="panel-heading">All Requests</div>
             <div class="panel-body" style="padding:0">
@@ -101,6 +101,7 @@
               </ul>
             </div>
           </div>
+        </div>
       </div>
     </div>
   </script>
@@ -252,7 +253,7 @@
 
 
   <script src="bower_components/jquery/jquery.min.js"></script>
-  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="bower_components/handlebars/handlebars.min.js"></script>
   <script src="bower_components/ember/ember.js"></script>
   <script src="bower_components/ember-data/ember-data.js"></script>
