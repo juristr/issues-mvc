@@ -115,7 +115,7 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
       var comment = this.store.createRecord('comment', {
         comment: this.get('commentBody'),
         author: 'Juri',
-        creationDate: new Date()
+        lastUpdated: new Date()
       });
 
       var model = self.get('model');
@@ -153,7 +153,7 @@ App.Request = DS.Model.extend({
 App.Comment = DS.Model.extend({
   comment: DS.attr('string'),
   author: DS.attr('string'),
-  creationDate: DS.attr('date')
+  lastUpdated: DS.attr('date')
   // request: DS.belongsTo('request')
 });
 
@@ -172,49 +172,49 @@ Ember.Handlebars.helper('format-date', function(date) {
 
 /* Fixture data */
 
-App.Request.FIXTURES = [
-  {
-      "id": 1,
-      "title": "Forum für Bürgeranliegen",
-      "description": "Es wäre interessant wenn ich als Bürger die Möglichkeit hätte in einem Forum meine Anliegen anzuführen bzw. Hilfestellung bekommen kann.",
-      "status": "Open",
-      "creationDate": "2014-04-10T15:00:00Z",
-      "author": "Juri",
-      "owner": "",
-      "comments": [1]
-  },
-  {
-      "id": 3,
-      "title": "Another requirement",
-      "description": "A finished requirement...",
-      "status": "Done",
-      "creationDate": "2014-03-20T10:00:00Z",
-      "author": "Juri",
-      "owner": "Juri"
-  },
-  {
-      "id": 2,
-      "title": "Login mit Facebook",
-      "description": "Ich möchte mich auch mit meinem Facebook Account authentifizieren können!",
-      "status": "Doing",
-      "creationDate": "2014-03-20T10:00:00Z",
-      "author": "Juri",
-      "owner": "Christoph",
-      "comments": [2]
-  }
-];
+// App.Request.FIXTURES = [
+//   {
+//       "id": 1,
+//       "title": "Forum für Bürgeranliegen",
+//       "description": "Es wäre interessant wenn ich als Bürger die Möglichkeit hätte in einem Forum meine Anliegen anzuführen bzw. Hilfestellung bekommen kann.",
+//       "status": "Open",
+//       "creationDate": "2014-04-10T15:00:00Z",
+//       "author": "Juri",
+//       "owner": "",
+//       "comments": [1]
+//   },
+//   {
+//       "id": 3,
+//       "title": "Another requirement",
+//       "description": "A finished requirement...",
+//       "status": "Done",
+//       "creationDate": "2014-03-20T10:00:00Z",
+//       "author": "Juri",
+//       "owner": "Juri"
+//   },
+//   {
+//       "id": 2,
+//       "title": "Login mit Facebook",
+//       "description": "Ich möchte mich auch mit meinem Facebook Account authentifizieren können!",
+//       "status": "Doing",
+//       "creationDate": "2014-03-20T10:00:00Z",
+//       "author": "Juri",
+//       "owner": "Christoph",
+//       "comments": [2]
+//   }
+// ];
 
-App.Comment.FIXTURES = [
-  {
-    "id": 1,
-    "comment": "the comment",
-    "author": "Juri",
-    "creationDate": "2014-04-10T15:00:00Z"
-  },
-  {
-    "id": 2,
-    "comment": "another comment",
-    "author": "Juri",
-    "creationDate": "2014-04-10T15:00:00Z"
-  }
-];
+// App.Comment.FIXTURES = [
+//   {
+//     "id": 1,
+//     "comment": "the comment",
+//     "author": "Juri",
+//     "creationDate": "2014-04-10T15:00:00Z"
+//   },
+//   {
+//     "id": 2,
+//     "comment": "another comment",
+//     "author": "Juri",
+//     "creationDate": "2014-04-10T15:00:00Z"
+//   }
+// ];

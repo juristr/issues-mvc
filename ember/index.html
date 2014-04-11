@@ -187,7 +187,7 @@
         <div class="col-md-11">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <span>created by {{ author }}&nbsp;{{format-date creationDate }}</span>
+              <span>created by {{ author }}&nbsp;{{format-date lastUpdated }}</span>
               <span class="pull-right">
                 <a href="#" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                 <button class="btn btn-default btn-xs" {{action "removeComment" this }}>
@@ -197,7 +197,7 @@
             </div>
             <div class="panel-body">
               <p>
-                {{ comment }}
+                {{format-markdown comment }}
               </p>
             </div>
           </div>
