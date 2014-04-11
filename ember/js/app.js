@@ -5,7 +5,9 @@ App = Ember.Application.create({
 App.Router.map(function(){
     this.route('about');
     this.resource('requests', function(){
-      this.route('filter', { path: '/filter/:status'});
+      this.route('open');
+      this.route('closed');
+
       this.route('details', { path: '/details/:id' });
       this.route('edit', { path: '/edit/:id' });
       this.route('create', { path: '/create' });
@@ -26,19 +28,36 @@ App.ApplicationAdapter = DS.LSAdapter.extend({
 App.RequestsIndexRoute = Ember.Route.extend({
   model: function(){
     return this.store.find('request');
-  }
-});
-
-App.RequestsFilterRoute = Ember.Route.extend({
-
-  renderTemplate: function(){
-    this.render('requests.index');
   },
-
-  model: function(filter){
-    return this.store.find('request', { status: filter.status });
+  setupController: function(){
+    this.controllerFor('requests').set('filteredRequests', this.modelFor('requests'));
   }
 });
+
+// App.RequestsOpenRoute = Ember.Route.extend({
+
+//   setupController: function(){
+//     this.controllerFor('requests').set('filteredRequests', function(){
+//       return
+//     });
+//   }
+
+// });
+
+App.RequestsController = Ember.ArrayController.extend({
+
+});
+
+// App.RequestsFilterRoute = Ember.Route.extend({
+
+//   renderTemplate: function(){
+//     this.render('requests.index');
+//   },
+
+//   model: function(filter){
+//     return this.store.find('request', { status: filter.status });
+//   }
+// });
 
 App.RequestsEditRoute = Ember.Route.extend({
 

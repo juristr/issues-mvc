@@ -80,8 +80,7 @@
         </ul>
         <fieldset>
           <legend>State</legend>
-          {{#link-to "requests.filter" "open" class="btn btn-default" }}Open{{/link-to}}
-          {{#link-to "requests.filter" "closed" class="btn btn-default" }}Closed{{/link-to}}
+
         </fieldset>
       </div>
       <div class="col-md-9">
@@ -90,7 +89,7 @@
             <div class="panel-body" style="padding:0">
               <ul class="well-list issues-list">
                 {{#if this.length}}
-                  {{#each}}
+                  {{#each filteredRequests }}
                     {{partial "requests/listentry"}}
                   {{/each}}
                 {{else}}
