@@ -120,7 +120,6 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
       });
 
       var model = this.get('model');
-
       model.get('comments').addObject(comment);
       model.save();
 
