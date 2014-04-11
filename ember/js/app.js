@@ -85,10 +85,8 @@ App.RequestsCreateController = Ember.ObjectController.extend({
       model.set('creationDate', new Date());
 
       model.save().then(function(){
-
+        self.transitionTo('requests.index');
       });
-
-      self.transitionTo('requests.index');
 
     }
     // ,

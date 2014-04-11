@@ -127,7 +127,7 @@
           <i class="fa fa-comments"></i> {{ comments.length }}
         </span>
         <div class="pull-right">
-          <small>updated <time class="issue_update_ago" data-placement="bottom" data-toggle="tooltip">{{format-date "creationDate" }}</time>
+          <small>updated <time class="issue_update_ago" data-placement="bottom" data-toggle="tooltip">{{format-date lastUpdated }}</time>
           </small>
         </div>
       </div>
@@ -159,7 +159,7 @@
           <span class="label label-warning"><i class="fa fa-info-circle"></i> {{ status }}</span>
         </div>
         <span class="author">{{ author }}</span>
-        opened this request {{format-date "creationDate" }}
+        opened this request {{format-date creationDate }}
            · {{ comments.length }} comment
         </div>
       </div>
@@ -168,7 +168,7 @@
       <div class="col-md-12">
         <div class="panel panel-info">
           <div class="panel-heading">
-            <span>created by {{ author }}&nbsp;{{format-date "creationDate" }}</span>
+            <span>created by {{ author }}&nbsp;{{format-date lastUpdated }}</span>
           </div>
           <div class="panel-body">
             <p>
@@ -188,7 +188,7 @@
         <div class="col-md-11">
           <div class="panel panel-default">
             <div class="panel-heading">
-              <span>created by {{ author }}&nbsp;{{format-date "creationDate" }}</span>
+              <span>created by {{ author }}&nbsp;{{format-date creationDate }}</span>
               <span class="pull-right">
                 <a href="#" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
                 <button class="btn btn-default btn-xs" {{action "removeComment" this }}>
