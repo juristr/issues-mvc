@@ -13,6 +13,18 @@ ul.well-list {
     padding: 0;
 }
 
+.request-title{
+    margin-left: -25px;
+}
+
+.go-back {
+    color: #ccc;
+}
+
+.go-back:hover {
+    color: #4183c4;
+}
+
 .well-list {
     margin: 0;
     padding: 0;

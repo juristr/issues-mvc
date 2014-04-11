@@ -12,6 +12,7 @@ App.Router.map(function(){
     });
 });
 
+App.ApplicationSerializer = DS.LSSerializer.extend();
 App.ApplicationAdapter = DS.LSAdapter.extend({
   namespace: 'requests-emberjs'
 });
@@ -93,12 +94,7 @@ App.RequestsCreateController = Ember.ObjectController.extend({
       });
 
     }
-    // ,
 
-    // 'cancel': function(){
-    //   this.get('model').rollback();
-    //   this.transitionTo('requests.index');
-    // }
   }
 });
 
@@ -117,17 +113,21 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
     'addComment': function(){
       var self = this;
       var comment = this.store.createRecord('comment', {
-        comment: this.get('commentBody')
+        comment: this.get('commentBody'),
+        author: 'Juri',
+        creationDate: new Date()
       });
 
       var model = self.get('model');
-      model.get('comments').then(function(commentList){
-        commentList.addObject(comment);
-        model.save();
 
-        self.set('commentBody', '');
+      comment.save().then(function(){
+        model.get('comments').then(function(commentList){
+            commentList.addObject(comment);
+            model.save();
+
+            self.set('commentBody', '');
+          });
       });
-
     },
 
     'removeComment': function(commentToRemove){
@@ -154,6 +154,7 @@ App.Comment = DS.Model.extend({
   comment: DS.attr('string'),
   author: DS.attr('string'),
   creationDate: DS.attr('date')
+  // request: DS.belongsTo('request')
 });
 
 
