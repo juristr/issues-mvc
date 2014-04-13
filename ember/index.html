@@ -59,10 +59,11 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/index">
+    <h1>T:{{ filteredRequests }}</h1>
     <div class="row">
       <div class="col-md-12">
         <div class="pull-left">
-          <h1>Requests</h1>        
+          <h1>Requests</h1>
         </div>
         <div class="pull-right">
           {{partial "requests/new"}}
@@ -90,15 +91,11 @@
             <div class="panel-heading">All Requests</div>
             <div class="panel-body" style="padding:0">
               <ul class="well-list issues-list">
-                {{#if this.length}}
-                  {{#each }}
+
+                  {{#each filteredRequests }}
                     {{partial "requests/listentry"}}
                   {{/each}}
-                {{else}}
-                  <li>
-                    Oops, nothing to show here. Do you want to {{#link-to "requests.create"}}add{{/link-to}} a new one??
-                  </li>
-                {{/if}}
+
               </ul>
             </div>
           </div>

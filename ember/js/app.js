@@ -5,6 +5,7 @@ App = Ember.Application.create({
 App.Router.map(function(){
     this.route('about');
     this.resource('requests', function(){
+      this.route('mine', { path: '/mine'})
       this.route('open');
       this.route('closed');
 
@@ -41,7 +42,7 @@ App.RequestsOpenRoute = Ember.Route.extend({
       return request.get('status') === 'open';
     });
 
-    controller.set('model', filteredData);
+    this.controllerFor('requests').set('model', filteredData);
   },
 
   renderTemplate: function(){
@@ -55,12 +56,29 @@ App.RequestsClosedRoute = Ember.Route.extend({
       return request.get('status') !== 'open';
     });
 
-    controller.set('model', filteredData);
+    this.controllerFor('requests').set('model', filteredData);
   },
 
   renderTemplate: function(){
     this.render('requests.index');
   }
+});
+
+App.RequestsController = Ember.ArrayController.extend({
+  queryParams: ['status'],
+  status: null,
+
+  filteredRequests: function() {
+    var status = this.get('status');
+    var requests = this.get('model');
+
+    if (status) {
+      return requests.filterProperty('status', status);
+    } else {
+      return requests;
+    }
+  }.property('status', 'model')
+
 });
 
 // App.RequestsOpenRoute = Ember.Route.extend({
