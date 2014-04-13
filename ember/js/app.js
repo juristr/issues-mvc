@@ -5,7 +5,7 @@ App = Ember.Application.create({
 App.Router.map(function(){
     this.route('about');
     this.resource('requests', function(){
-      this.route('mine', { path: '/mine'})
+      // this.route('mine', { path: '/mine'})
       this.route('open');
       this.route('closed');
 
@@ -27,8 +27,12 @@ App.ApplicationAdapter = DS.LSAdapter.extend({
 // });
 
 App.RequestsRoute = Ember.Route.extend({
-  afterModel: function() {
-    this.transitionTo('requests.open');
+  // afterModel: function() {
+  //   this.transitionTo('requests.open');
+  // },
+
+  setupController: function(controller, model){
+    controller.set('model', model);
   },
 
   model: function(){
@@ -36,37 +40,45 @@ App.RequestsRoute = Ember.Route.extend({
   }
 });
 
-App.RequestsOpenRoute = Ember.Route.extend({
-  setupController: function(controller, model){
-    var filteredData = this.store.filter('request', function(request){
-      return request.get('status') === 'open';
-    });
+// App.RequestsOpenRoute = Ember.Route.extend({
+//   setupController: function(controller, model){
+//     var filteredData = this.store.filter('request', function(request){
+//       return request.get('status') === 'open';
+//     });
+//
+//     this.controllerFor('requests').set('model', filteredData);
+//   },
+//
+//   renderTemplate: function(){
+//     this.render('requests.index');
+//   }
+// });
+//
+// App.RequestsClosedRoute = Ember.Route.extend({
+//   setupController: function(controller, model){
+//     var filteredData = this.store.filter('request', function(request){
+//       return request.get('status') !== 'open';
+//     });
+//
+//     this.controllerFor('requests').set('model', filteredData);
+//   },
+//
+//   renderTemplate: function(){
+//     this.render('requests.index');
+//   }
+// });
 
-    this.controllerFor('requests').set('model', filteredData);
-  },
-
-  renderTemplate: function(){
-    this.render('requests.index');
-  }
-});
-
-App.RequestsClosedRoute = Ember.Route.extend({
-  setupController: function(controller, model){
-    var filteredData = this.store.filter('request', function(request){
-      return request.get('status') !== 'open';
-    });
-
-    this.controllerFor('requests').set('model', filteredData);
-  },
-
-  renderTemplate: function(){
-    this.render('requests.index');
-  }
-});
-
-App.RequestsController = Ember.ArrayController.extend({
+App.RequestsIndexController = Ember.ArrayController.extend({
   queryParams: ['status'],
   status: null,
+
+  isTest: true,
+
+  actions: {
+    'test': function(){
+      alert('hi');
+    }
+  },
 
   filteredRequests: function() {
     var status = this.get('status');

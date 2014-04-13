@@ -59,7 +59,8 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/index">
-    <h1>T:{{ filteredRequests }}</h1>
+    <h1>T:{{ this.length }} - V:{{ isTest }}</h1>
+    <button {{action "test"}}>Test</button>
     <div class="row">
       <div class="col-md-12">
         <div class="pull-left">
@@ -92,7 +93,7 @@
             <div class="panel-body" style="padding:0">
               <ul class="well-list issues-list">
 
-                  {{#each filteredRequests }}
+                  {{#each }}
                     {{partial "requests/listentry"}}
                   {{/each}}
 
