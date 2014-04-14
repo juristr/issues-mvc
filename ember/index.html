@@ -76,11 +76,15 @@
     <div class="row">
       <div class="col-md-3">
         <ul class="nav nav-pills nav-stacked">
-          <li><a href="#">Assigned to me</a></li>
-          <li><a href="#">Created by me</a></li>
-          {{#linkTo "requests" tagName="li"}}
+          {{#link-to "requests" tagName="li"}}
             <a {{bindAttr href="view.href"}}>All</a>
-          {{/linkTo}}
+          {{/link-to}}
+          {{#link-to "requests.assigned" tagName="li"}}
+            <a {{bindAttr href="view.href"}}>Assigned to you</a>
+          {{/link-to}}
+          {{#link-to "requests.created" tagName="li"}}
+            <a {{bindAttr href="view.href"}}>Created by you</a>
+          {{/link-to}}
         </ul>
       </div>
       <div class="col-md-9">

@@ -5,9 +5,8 @@ App = Ember.Application.create({
 App.Router.map(function(){
     this.route('about');
     this.resource('requests', function(){
-      // this.route('mine', { path: '/mine'})
-      this.route('open');
-      this.route('closed');
+      this.route('created', { path: '/created_by'});
+      this.route('assigned', { path: '/assigned'});
 
       this.route('details', { path: '/details/:id' });
       this.route('edit', { path: '/edit/:id' });
@@ -27,15 +26,36 @@ App.ApplicationAdapter = DS.LSAdapter.extend({
 // });
 
 App.RequestsIndexRoute = Ember.Route.extend({
-  // afterModel: function() {
-  //   this.transitionTo('requests.open');
-  // },
-
   model: function(){
     return this.store.find('request');
   }
 });
 
+App.RequestsCreatedRoute = Ember.Route.extend({
+
+  setupController: function(controller, model){
+    this.controllerFor('requests.index').set('model', model);
+  },
+
+  model: function(){
+    return this.store.find('request', { author: 'Juri' });
+  }
+});
+
+App.RequestsAssignedRoute = Ember.Route.extend({
+
+  setupController: function(controller, model){
+    this.controllerFor('requests.index').set('model', model);
+  },
+
+  model: function(){
+    return this.store.find('request', { owner: 'Juri' });
+  }
+});
+
+/*
+Handles the issue list
+ */
 App.RequestsIndexController = Ember.ArrayController.extend({
   queryParams: ['status'],
   status: "open",
