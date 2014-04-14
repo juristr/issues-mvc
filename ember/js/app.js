@@ -37,6 +37,10 @@ App.RequestsCreatedRoute = Ember.Route.extend({
     this.controllerFor('requests.index').set('model', model);
   },
 
+  renderTemplate: function(){
+    this.render('requests.index');
+  },
+
   model: function(){
     return this.store.find('request', { author: 'Juri' });
   }
@@ -46,6 +50,10 @@ App.RequestsAssignedRoute = Ember.Route.extend({
 
   setupController: function(controller, model){
     this.controllerFor('requests.index').set('model', model);
+  },
+
+  renderTemplate: function(){
+    this.render('requests.index');
   },
 
   model: function(){
