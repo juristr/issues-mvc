@@ -225,6 +225,36 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
 
 });
 
+App.UsersAdminRoute = Ember.Route.extend({
+
+  model: function(){
+    return this.store.find('user');
+  }
+
+});
+
+App.UsersAdminController = Ember.ArrayController.extend({
+  username: null,
+
+  actions: {
+    'addUser': function(){
+      var self = this;
+      var username = this.get('username');
+
+      var newUser = this.store.createRecord('user', {
+        username: username
+      });
+
+      newUser.save().then(function(){
+        //clear the input field
+        self.set('username', null);
+      });
+    }
+  }
+});
+
+
+
 /* Model definitions */
 
 App.Request = DS.Model.extend({
@@ -244,6 +274,12 @@ App.Comment = DS.Model.extend({
   lastUpdated: DS.attr('date'),
   systemLog: DS.attr('boolean', { defaultValue: false }),
   request: DS.belongsTo('request', {async:true})
+});
+
+App.User = DS.Model.extend({
+  username: DS.attr('string'),
+  requests: DS.hasMany('request', {async:true}),
+  comments: DS.hasMany('comment', {async:true})
 });
 
 

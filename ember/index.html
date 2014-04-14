@@ -300,6 +300,35 @@
 
   <script type="text/x-handlebars" data-template-name="users/admin">
     <h1>User Administration</h1>
+    <table class="table table-condensed">
+    <thead>
+    <th>User</th>
+    <th>Action</th>
+    </thead>
+    <tbody>
+    {{#if this.length }}
+      {{#each}}
+        <tr>
+        <td>{{username}}</td>
+        <td>
+        Actions here..
+        </td>
+        </tr>
+      {{/each}}
+    {{else}}
+      <tr>
+        <td colspan="2" class="warning">No users yet.</td>
+      </tr>
+    {{/if}}
+    </tbody>
+    </table>
+    <hr>
+    <div class="row">
+      <div class="col-md-12">
+        {{input type="text" value=username placeholder="Enter username"}}
+        <button class="btn btn-default" {{action "addUser"}}>Add</button>
+      </div>
+    </div>
   </script>
 
   <script type="text/x-handlebars" data-template-name="loading">
