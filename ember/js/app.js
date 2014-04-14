@@ -12,6 +12,11 @@ App.Router.map(function(){
       this.route('edit', { path: '/edit/:id' });
       this.route('create', { path: '/create' });
     });
+
+    this.resource('users', function(){
+      this.route('profile');
+      this.route('admin');
+    });
 });
 
 App.ApplicationSerializer = DS.LSSerializer.extend();

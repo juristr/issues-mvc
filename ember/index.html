@@ -32,8 +32,30 @@
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
-                        <li>{{#link-to 'index'}}Home{{/link-to}}</li>
-                        <li>{{#link-to 'requests'}}Requests{{/link-to}}</li>
+                      {{#link-to "index" tagName="li"}}
+                        <a {{bindAttr href="view.href"}}>Home</a>
+                      {{/link-to}}
+                      {{#link-to "requests" tagName="li"}}
+                        <a {{bindAttr href="view.href"}}>Issues</a>
+                      {{/link-to}}
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                      <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Juri <b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                          {{#link-to "users.profile" tagName="li"}}
+                            <a {{bindAttr href="view.href"}}>Profile</a>
+                          {{/link-to}}
+                          <li class="divider"></li>
+                          <li class="dropdown-header">User administration</li>
+                          {{#link-to "users.admin" tagName="li"}}
+                            <a {{bindAttr href="view.href"}}>Manage users</a>
+                          {{/link-to}}
+                          <li class="divider"></li>
+                          <li class="dropdown-header">Nav header</li>
+                          <li><a href="#">Logout</a></li>
+                        </ul>
+                      </li>
                     </ul>
                 </div><!--/.nav-collapse -->
             </div><!--/.container-fluid -->
@@ -86,6 +108,7 @@
             <a {{bindAttr href="view.href"}}>Created by you</a>
           {{/link-to}}
         </ul>
+        <hr/>
       </div>
       <div class="col-md-9">
         <div class="request-filter-actions">
@@ -264,8 +287,16 @@
     </form>
   </script>
 
+  <script type="text/x-handlebars" data-template-name="users/profile">
+    <h1>User Profile</h1>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="users/admin">
+    <h1>User Administration</h1>
+  </script>
+
   <script type="text/x-handlebars" data-template-name="loading">
-    <p>Loading your links...</p>
+    <p>Loading your issues...</p>
   </script>
 
 
