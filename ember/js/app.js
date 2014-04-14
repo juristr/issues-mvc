@@ -84,30 +84,6 @@ App.RequestsIndexController = Ember.ArrayController.extend({
 
 });
 
-// App.RequestsOpenRoute = Ember.Route.extend({
-
-//   setupController: function(){
-//     this.controllerFor('requests').set('filteredRequests', function(){
-//       return
-//     });
-//   }
-
-// });
-
-// App.RequestsController = Ember.ArrayController.extend({
-//
-// });
-
-// App.RequestsFilterRoute = Ember.Route.extend({
-
-//   renderTemplate: function(){
-//     this.render('requests.index');
-//   },
-
-//   model: function(filter){
-//     return this.store.find('request', { status: filter.status });
-//   }
-// });
 
 App.RequestsEditRoute = Ember.Route.extend({
 
@@ -179,17 +155,12 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
 
   isOpen: Ember.computed.equal('status', 'open'),
 
-  actions: {
-    'addComment': function(){
+  _saveComment: function(comment){
       var self = this;
-      var comment = this.store.createRecord('comment', {
-        comment: this.get('commentBody'),
-        author: 'Juri',
-        lastUpdated: new Date()
-      });
-
       var model = self.get('model');
 
+      // seems like I need to save both, the comment and the
+      // association to the request parent model
       comment.save().then(function(){
         model.get('comments').then(function(commentList){
             commentList.addObject(comment);
@@ -198,6 +169,17 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
             self.set('commentBody', '');
           });
       });
+  },
+
+  actions: {
+    'addComment': function(){
+      var comment = this.store.createRecord('comment', {
+        comment: this.get('commentBody'),
+        author: 'Juri',
+        lastUpdated: new Date()
+      });
+
+      this._saveComment(comment);
     },
 
     'removeComment': function(commentToRemove){
@@ -211,7 +193,6 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
       var model = this.get('model');
       model.set('status', 'closed');
 
-      var self = this;
       var comment = this.store.createRecord('comment', {
         comment: 'closed',
         author: 'Juri',
@@ -219,21 +200,13 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
         lastUpdated: new Date()
       });
 
-      comment.save().then(function(){
-        model.get('comments').then(function(commentList){
-            commentList.addObject(comment);
-            model.save();
-
-            self.set('commentBody', '');
-          });
-      });
+      this._saveComment(comment);
     },
 
     'reopen': function(){
       var model = this.get('model');
       model.set('status', 'open');
 
-      var self = this;
       var comment = this.store.createRecord('comment', {
         comment: 'open',
         author: 'Juri',
@@ -241,14 +214,7 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
         lastUpdated: new Date()
       });
 
-      comment.save().then(function(){
-        model.get('comments').then(function(commentList){
-            commentList.addObject(comment);
-            model.save();
-
-            self.set('commentBody', '');
-          });
-      });
+      this._saveComment(comment);
     }
   }
 
