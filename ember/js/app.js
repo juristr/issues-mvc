@@ -37,8 +37,8 @@ App.RequestsIndexRoute = Ember.Route.extend({
 });
 
 App.RequestsIndexController = Ember.ArrayController.extend({
-  queryParams: ['showStatus'],
-  showStatus: "open",
+  queryParams: ['status'],
+  status: "open",
 
   openItems: Ember.computed.filterBy('model', 'status', 'open'),
   closedItems: Ember.computed.filterBy('model', 'status', 'closed'),
@@ -51,15 +51,15 @@ App.RequestsIndexController = Ember.ArrayController.extend({
   }.property('model'),
 
   filteredRequests: function(){
-    var showStatus = this.get('showStatus');
+    var status = this.get('status');
     var model = this.get('model');
 
-    if(showStatus){
-      return model.filterProperty('status', showStatus);
+    if(status){
+      return model.filterProperty('status', status);
     }else{
       return model;
     }
-  }.property('showStatus', 'model')
+  }.property('status', 'model')
 
 });
 

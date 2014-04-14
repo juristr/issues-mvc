@@ -85,8 +85,8 @@
       </div>
       <div class="col-md-9">
         <div class="request-filter-actions">
-          {{#link-to "requests.index" (query-params showStatus="open") class="btn btn-default btn-sm" }}{{remainingOpen}} Open{{/link-to}}
-          {{#link-to "requests.index" (query-params showStatus="closed") class="btn btn-default btn-sm" }}{{remainingClosed}} Closed{{/link-to}}
+          {{#link-to "requests.index" (query-params status="open") class="btn btn-default btn-sm" }}{{remainingOpen}} Open{{/link-to}}
+          {{#link-to "requests.index" (query-params status="closed") class="btn btn-default btn-sm" }}{{remainingClosed}} Closed{{/link-to}}
         </div>
         <div class="panel panel-default">
             <div class="panel-heading">All Requests</div>
