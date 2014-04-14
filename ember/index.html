@@ -10,6 +10,9 @@
   <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
   -->
   <link href="assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <script type="text/javascript">
+    ENV = {FEATURES: {'query-params-new': true}};
+  </script>
 </head>
 <body>
   <script type="text/x-handlebars" data-template-name="application">
@@ -59,8 +62,6 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="requests/index">
-    <h1>T:{{ this.length }} - V:{{ isTest }}</h1>
-    <button {{action "test"}}>Test</button>
     <div class="row">
       <div class="col-md-12">
         <div class="pull-left">
@@ -83,23 +84,25 @@
         </ul>
       </div>
       <div class="col-md-9">
-        <div class="row request-filter-actions">
-          {{#link-to "requests.open" class="btn btn-default btn-sm" }}Open{{/link-to}}
-          {{#link-to "requests.closed" class="btn btn-default btn-sm" }}Closed{{/link-to}}
+        <div class="request-filter-actions">
+          {{#link-to "requests.index" (query-params showStatus="open") class="btn btn-default btn-sm" }}{{remainingOpen}} Open{{/link-to}}
+          {{#link-to "requests.index" (query-params showStatus="closed") class="btn btn-default btn-sm" }}{{remainingClosed}} Closed{{/link-to}}
         </div>
-        <div class="row">
-          <div class="panel panel-default">
+        <div class="panel panel-default">
             <div class="panel-heading">All Requests</div>
             <div class="panel-body" style="padding:0">
               <ul class="well-list issues-list">
-
-                  {{#each }}
+                {{#if filteredRequests.length}}
+                  {{#each filteredRequests }}
                     {{partial "requests/listentry"}}
                   {{/each}}
-
+                {{else}}
+                  <li>
+                    Oops, nothing to show here. Do you want to {{#link-to "requests.create"}}add{{/link-to}} a new one??
+                  </li>
+                {{/if}}
               </ul>
             </div>
-          </div>
         </div>
       </div>
     </div>
@@ -254,7 +257,8 @@
   <script src="bower_components/jquery/jquery.min.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
   <script src="bower_components/handlebars/handlebars.min.js"></script>
-  <script src="bower_components/ember/ember.js"></script>
+  <!--<script src="bower_components/ember/ember.js"></script>-->
+  <script src="http://builds.emberjs.com/ember-latest.js"></script>
   <script src="bower_components/ember-data/ember-data.js"></script>
   <script src="bower_components/ember-localstorage-adapter/localstorage_adapter.js"></script>
   <script src="js/libs/moment.min.js"></script>

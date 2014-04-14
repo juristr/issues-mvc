@@ -26,70 +26,40 @@ App.ApplicationAdapter = DS.LSAdapter.extend({
 //     adapter: DS.FixtureAdapter
 // });
 
-App.RequestsRoute = Ember.Route.extend({
+App.RequestsIndexRoute = Ember.Route.extend({
   // afterModel: function() {
   //   this.transitionTo('requests.open');
   // },
-
-  setupController: function(controller, model){
-    controller.set('model', model);
-  },
 
   model: function(){
     return this.store.find('request');
   }
 });
 
-// App.RequestsOpenRoute = Ember.Route.extend({
-//   setupController: function(controller, model){
-//     var filteredData = this.store.filter('request', function(request){
-//       return request.get('status') === 'open';
-//     });
-//
-//     this.controllerFor('requests').set('model', filteredData);
-//   },
-//
-//   renderTemplate: function(){
-//     this.render('requests.index');
-//   }
-// });
-//
-// App.RequestsClosedRoute = Ember.Route.extend({
-//   setupController: function(controller, model){
-//     var filteredData = this.store.filter('request', function(request){
-//       return request.get('status') !== 'open';
-//     });
-//
-//     this.controllerFor('requests').set('model', filteredData);
-//   },
-//
-//   renderTemplate: function(){
-//     this.render('requests.index');
-//   }
-// });
-
 App.RequestsIndexController = Ember.ArrayController.extend({
-  queryParams: ['status'],
-  status: null,
+  queryParams: ['showStatus'],
+  showStatus: "open",
 
-  isTest: true,
+  openItems: Ember.computed.filterBy('model', 'status', 'open'),
+  closedItems: Ember.computed.filterBy('model', 'status', 'closed'),
 
-  actions: {
-    'test': function(){
-      alert('hi');
+  remainingOpen: function(){
+    return this.get('model').filterProperty('status', 'open').length;
+  }.property('model'),
+  remainingClosed: function(){
+    return this.get('model').filterProperty('status', 'closed').length;
+  }.property('model'),
+
+  filteredRequests: function(){
+    var showStatus = this.get('showStatus');
+    var model = this.get('model');
+
+    if(showStatus){
+      return model.filterProperty('status', showStatus);
+    }else{
+      return model;
     }
-  },
-
-  filteredRequests: function() {
-    var status = this.get('status');
-    var requests = this.get('model');
-
-    if (status) {
-      return requests.filterProperty('status', status);
-    } else {
-      return requests;
-    }
-  }.property('status', 'model')
+  }.property('showStatus', 'model')
 
 });
 
