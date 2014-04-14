@@ -93,7 +93,9 @@
           {{#link-to "requests.index" (query-params status="closed") class="btn btn-default btn-sm" }}{{closedItems.length}} Closed{{/link-to}}
         </div>
         <div class="panel panel-default">
-            <div class="panel-heading">All Requests</div>
+            <div class="panel-heading">
+              <input type="checkbox">
+            </div>
             <div class="panel-body" style="padding:0">
               <ul class="well-list issues-list">
                 {{#if filteredRequests.length}}
@@ -114,23 +116,30 @@
 
   <script type="text/x-handlebars" data-template-name="requests/_listentry">
     <li class="issue">
-      <div class="issue-title">
-        <span class="str-truncated">
-          {{#link-to "requests.details" this }} {{ title }} {{/link-to}}
-        </span>
-      </div>
-      <div class="issue-info">
-        assigned to <a class="author_link" href="/u/juri.strumpflohner"><span class="author">{{ author }}</span></a>
-        <span>
-          <i class="fa fa-comments"></i> {{ comments.length }}
-        </span>
-        <div class="pull-right">
-          <small>updated <time class="issue_update_ago" data-placement="bottom" data-toggle="tooltip">{{format-date lastUpdated }}</time>
-          </small>
+      <div class="row">
+        <div class="col-xs-1">
+          <input type="checkbox">
         </div>
-      </div>
-      <div class="issue-actions">
-        {{#link-to "requests.edit" this class="btn btn-default btn-xs"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
+        <div class="col-xs-11">
+          <div class="issue-title">
+            <span class="str-truncated">
+              {{#link-to "requests.details" this }} {{ title }} {{/link-to}}
+            </span>
+          </div>
+          <div class="issue-info">
+            assigned to <a class="author_link" href="/u/juri.strumpflohner"><span class="author">{{ author }}</span></a>
+            <span>
+              <i class="fa fa-comments"></i> {{ comments.length }}
+            </span>
+            <div class="pull-right">
+              <small>updated <time class="issue_update_ago" data-placement="bottom" data-toggle="tooltip">{{format-date lastUpdated }}</time>
+              </small>
+            </div>
+          </div>
+          <div class="issue-actions">
+            {{#link-to "requests.edit" this class="btn btn-default btn-xs"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
+          </div>
+        </div>
       </div>
     </li>
   </script>
