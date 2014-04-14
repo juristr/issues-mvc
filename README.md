@@ -3,7 +3,14 @@ issues-mvc
 
 > TodoMVC evolved - Testing MVC frameworks on an oversimplified issue tracking system.
 
-[TodoMVC](http://todomvc.com/) is awesome in helping you to select a suitable MVC framework, but it is limited in that it only shows a very small, specific use case. Real-world software usually goes far beyond that in that it includes much more use cases that would be relevant/interesting to know how to implement them with the MVC framework you're going to choose.
+[TodoMVC](http://todomvc.com/) is awesome in helping you to select a suitable MVC framework, but it is limited in a couple of use cases. When I look at MVC JavaScript frameworks I'm interested in more scenarios which you usually encounter in real-world apps like
+
+- filtering data
+- master-detail relationships
+- model associations (has-many, belongs-to,..)
+- ...
+
+In IssuesMVC I'd like to try these out.
 
 **Tl;dr:** I am just doing a review on the most popular JavaScript MVC frameworks. To experiment a bit with them I started building something a little more evolved than TodoMVC and what came out was a GitHub-style issue management app.  
 Just open sourced it to let some more experienced devs help, do code reviews or even contribute. Would be great!
