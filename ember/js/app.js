@@ -43,13 +43,6 @@ App.RequestsIndexController = Ember.ArrayController.extend({
   openItems: Ember.computed.filterBy('model', 'status', 'open'),
   closedItems: Ember.computed.filterBy('model', 'status', 'closed'),
 
-  remainingOpen: function(){
-    return this.get('model').filterProperty('status', 'open').length;
-  }.property('model'),
-  remainingClosed: function(){
-    return this.get('model').filterProperty('status', 'closed').length;
-  }.property('model'),
-
   filteredRequests: function(){
     var status = this.get('status');
     var model = this.get('model');
