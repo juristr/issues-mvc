@@ -66,9 +66,9 @@ ul.well-list {
 }
 
 .issues-list .issue .issue-actions {
-    position: absolute;
+    /*position: absolute;
     top: 10px;
-    right: 2px;
+    right: 2px;*/
 }
 
 small, .small {
