@@ -249,6 +249,16 @@ App.UsersAdminController = Ember.ArrayController.extend({
         //clear the input field
         self.set('username', null);
       });
+    },
+
+    'setCurrent': function(user){
+    },
+
+    'deleteUser': function(user){
+      user.deleteRecord();
+
+      // strangely I have to do this as well
+      this.get('model').save();
     }
   }
 });

@@ -311,7 +311,8 @@
         <tr>
         <td>{{username}}</td>
         <td>
-        Actions here..
+          <button class="btn btn-success btn-sm" {{action "setCurrent" this}}>Set current</button>
+          <button class="btn btn-danger btn-sm" {{action "deleteUser" this}}>Delete</button>
         </td>
         </tr>
       {{/each}}
