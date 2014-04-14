@@ -247,6 +247,25 @@ App.Comment = DS.Model.extend({
 });
 
 
+/* Ember views */
+App.Select2SelectView = Ember.Select.extend({
+  prompt: 'Please select...',
+  classNames: ['input-xlarge'],
+
+  didInsertElement: function() {
+    Ember.run.scheduleOnce('afterRender', this, 'processChildElements');
+  },
+
+  processChildElements: function() {
+    this.$().select2();
+  },
+
+  willDestroyElement: function () {
+    this.$().select2("destroy");
+  }
+});
+
+
 /* Handlebars helpers */
 
 var showdown = new Showdown.converter();
