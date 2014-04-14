@@ -24,6 +24,9 @@ Just open sourced it to let some more experienced devs help, do code reviews or 
 
 So far, take a [look here](https://github.com/juristr/issues-mvc/issues).
 
+## So far..
+
+- [EmberJS Demo](http://juristr.com/issues-mvc/ember/index.html)
 
 ## License
 
