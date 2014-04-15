@@ -30,6 +30,8 @@ App.ApplicationAdapter = DS.LSAdapter.extend({
 //     adapter: DS.FixtureAdapter
 // });
 
+/* Routes */
+
 App.RequestsIndexRoute = Ember.Route.extend({
   model: function(){
     return this.store.find('request');
@@ -66,12 +68,33 @@ App.RequestsAssignedRoute = Ember.Route.extend({
   }
 });
 
-/*
-Handles the issue list
- */
+/* Controllers */
+
+App.ApplicationController = Ember.Controller.extend({
+  currentUser: 'Juri',
+
+  init: function(){
+    this._super();
+
+    // find the user which has the current user from
+    // the store..
+    var allUsers = this.store.find('user');
+
+    var currentUser = allUsers.filterBy('isCurrent', true);
+    var otherUsers = allUsers.filterBy('isCurrent', false);
+
+    // if(currentUser){
+    //   this.set('currentUser', 'Juri');
+    // }else{
+
+    // }
+
+  }
+});
+
 App.RequestsIndexController = Ember.ArrayController.extend({
   queryParams: ['status'],
-  status: "open",
+  status: 'open',
 
   openItems: Ember.computed.filterBy('model', 'status', 'open'),
   closedItems: Ember.computed.filterBy('model', 'status', 'closed'),
@@ -156,6 +179,8 @@ App.RequestsDetailsRoute = Ember.Route.extend({
 });
 
 App.RequestsDetailsController = Ember.ObjectController.extend({
+  needs: ['application'],
+  currentUser: Ember.computed.alias('controllers.application.currentUser'),
   commentBody: null,
 
   isOpen: Ember.computed.equal('status', 'open'),
@@ -180,7 +205,7 @@ App.RequestsDetailsController = Ember.ObjectController.extend({
     'addComment': function(){
       var comment = this.store.createRecord('comment', {
         comment: this.get('commentBody'),
-        author: 'Juri',
+        author: this.get('currentUser'),
         lastUpdated: new Date()
       });
 
@@ -234,6 +259,8 @@ App.UsersAdminRoute = Ember.Route.extend({
 });
 
 App.UsersAdminController = Ember.ArrayController.extend({
+  needs: ['application'],
+  currentUser: Ember.computed.alias('controllers.application.currentUser'),
   username: null,
 
   actions: {
@@ -252,6 +279,12 @@ App.UsersAdminController = Ember.ArrayController.extend({
     },
 
     'setCurrent': function(user){
+      var self = this;
+
+      user.set('isCurrent', true);
+      user.save().then(function(){
+        self.set('currentUser', user);
+      });
     },
 
     'deleteUser': function(user){
@@ -288,6 +321,9 @@ App.Comment = DS.Model.extend({
 
 App.User = DS.Model.extend({
   username: DS.attr('string'),
+  // indicates whether this is the current user; just for the
+  // demo here, wouldn't appear in a real-world app.
+  isCurrent: false,
   requests: DS.hasMany('request', {async:true}),
   comments: DS.hasMany('comment', {async:true})
 });
@@ -308,6 +344,23 @@ App.Select2SelectView = Ember.Select.extend({
 
   willDestroyElement: function () {
     this.$().select2("destroy");
+  }
+});
+
+App.FilePicker = Ember.View.extend({
+  didInsertElement: function() {
+    var self = this;
+
+    var fileInput = new mOxie.FileInput({
+      browse_button: this.$('button').get(0),
+      multiple: true
+    });
+
+    fileInput.onchange = function(e) {
+      self.get('controller').send('addFiles', fileInput.files);
+    };
+
+    fileInput.init();
   }
 });
 
