@@ -89,6 +89,22 @@ App.RequestsEditRoute = Ember.Route.extend({
 
   model: function(params){
     return this.store.find('request', params.id);
+  },
+
+  actions: {
+    // Rollback eventually unsaved changes when we
+    // transition away from this route
+    // (http://emberjs.com/guides/routing/preventing-and-retrying-transitions/)
+    willTransition: function(transition){
+      var model = this.controller.get('model');
+
+      if(model.get('isDirty')){
+        // we could ask about whether to abandon changes
+        model.rollback();
+      }
+
+      return true;
+    }
   }
 
 });
@@ -107,7 +123,6 @@ App.RequestsEditController = Ember.ObjectController.extend({
     },
 
     'cancel': function(){
-      this.get('model').rollback();
       this.transitionTo('requests.index');
     }
   }
@@ -117,6 +132,22 @@ App.RequestsCreateRoute = Ember.Route.extend({
 
   model: function(){
     return this.store.createRecord('request');
+  },
+
+  actions: {
+    // Rollback eventually unsaved changes when we
+    // transition away from this route
+    // (http://emberjs.com/guides/routing/preventing-and-retrying-transitions/)
+    willTransition: function(transition){
+      var model = this.controller.get('model');
+
+      if(model.get('isDirty')){
+        // we could ask about whether to abandon changes
+        model.rollback();
+      }
+
+      return true;
+    }
   },
 
   renderTemplate: function(){
@@ -145,7 +176,6 @@ App.RequestsCreateController = Ember.ObjectController.extend({
     },
 
     'cancel': function(){
-      this.get('model').rollback();
       this.transitionTo('requests.index');
     }
 
