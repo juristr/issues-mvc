@@ -15,8 +15,31 @@
   <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 </head>
   <body>
-    <h1>Welcome to CanJS!</h1>
-    <div id="content"></div>
+    <div class="container">
+
+        <!-- Static navbar -->
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Issue Tracker</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        <li>{{#link-to 'index'}}Home{{/link-to}}</li>
+                        <li>{{#link-to 'requests'}}Requests{{/link-to}}</li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div><!--/.container-fluid -->
+        </div>
+
+        <div id="js-content-container"></div>
+    </div>
     <script type='text/javascript' src='bower_components/requirejs/require.js' data-main='issues'></script>
     <script type='text/javascript' src='requirejsconfig.js'></script>
   </body>
