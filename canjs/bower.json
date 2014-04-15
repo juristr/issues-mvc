@@ -2,9 +2,10 @@
   "name": "issues",
   "version": "0.0.0",
   "dependencies": {
-    "require-can-renderers" : "git://github.com/retro/require-can-renderers.git",
-"requirejs" : "~2.1.6",
-    "canjs" : "~2.0.4",
-    "jquery" : "~1.9.1"
+    "require-can-renderers": "git://github.com/retro/require-can-renderers.git",
+    "requirejs": "~2.1.6",
+    "canjs": "~2.0.4",
+    "jquery": "~1.9.1",
+    "bootstrap": "~3.1.1"
   }
 }
