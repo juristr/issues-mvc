@@ -104,6 +104,11 @@ App.RequestsEditController = Ember.ObjectController.extend({
       model.save().then(function(){
         self.transitionTo('requests.details', model);
       });
+    },
+
+    'cancel': function(){
+      this.get('model').rollback();
+      this.transitionTo('requests.index');
     }
   }
 });
@@ -137,6 +142,11 @@ App.RequestsCreateController = Ember.ObjectController.extend({
         self.transitionTo('requests.index');
       });
 
+    },
+
+    'cancel': function(){
+      this.get('model').rollback();
+      this.transitionTo('requests.index');
     }
 
   }
