@@ -1,6 +1,7 @@
-[![Stories in Ready](https://badge.waffle.io/juristr/issues-mvc.png?label=ready&title=Ready)](https://waffle.io/juristr/issues-mvc)
 issues-mvc
 ==========
+
+[![Stories in Ready](https://badge.waffle.io/juristr/issues-mvc.png?label=ready&title=Ready)](https://waffle.io/juristr/issues-mvc)
 
 > TodoMVC evolved - Testing MVC frameworks on an oversimplified issue tracking system.
 
