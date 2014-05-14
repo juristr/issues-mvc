@@ -56,6 +56,59 @@
       </div>
     </script>
 
+    <script type="text/mustache" id="requests_index">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="pull-left">
+            <h1>Issues</h1>
+          </div>
+          <div class="pull-right">
+            {{partial "requests/new"}}
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <div class="row">
+        <div class="col-md-3">
+          <ul class="nav nav-pills nav-stacked">
+            <li>
+              <a href="#!requests" {{bindAttr href="view.href"}}>All</a>
+            </li>
+            <li>
+              <a href="#!requests/assigned">Assigned to you</a>
+            </li>
+            <li>
+              <a href="#!requests/created">Created by you</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-9">
+          <div class="request-filter-actions">
+            <a href="requests/index" (query-params status="open") class="btn btn-default btn-sm">{{openItems.length}} Open</a>
+            <a href="requests/index" (query-params status="closed") class="btn btn-default btn-sm">{{closedItems.length}} Closed</a>
+          </div>
+          <div class="panel panel-default">
+              <div class="panel-heading">
+                <input type="checkbox">
+              </div>
+              <div class="panel-body" style="padding:0">
+                <ul class="well-list issues-list">
+                  {{#if filteredRequests.length}}
+                    {{#each filteredRequests }}
+                      {{partial "requests/listentry"}}
+                    {{/each}}
+                  {{else}}
+                    <li>
+                      Oops, nothing to show here. Do you want to {{#link-to "requests.create"}}add{{/link-to}} a new one??
+                    </li>
+                  {{/if}}
+                </ul>
+              </div>
+          </div>
+        </div>
+      </div>
+    </script>
+
     <div id="js-content"></div>
 
     <script type='text/javascript' src='bower_components/requirejs/require.js' data-main='issues'></script>

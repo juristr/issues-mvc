@@ -13,6 +13,38 @@ require(['can', 'mustache'], function(can){
 
         'index route': function(){
             this.element.find('.js-content-container').html(can.view('index'));
+        },
+
+        'requests route': function(){
+
+        },
+
+        'requests/created_by route': function(){
+
+        },
+
+        'requests/assigned route': function(){
+
+        },
+
+        'details/:id route': function(){
+
+        },
+
+        'edit/:id route': function(){
+
+        },
+
+        'create route': function(){
+
+        }
+
+    });
+
+    var RequestListController = can.Control({
+
+        init: function(){
+
         }
 
     });
