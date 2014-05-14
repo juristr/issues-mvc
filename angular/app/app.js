@@ -2,7 +2,19 @@
 
   'use strict';
 
-  angular.module('issuesApp', []);
+  angular
+    .module('issuesApp', [
+      'ngRoute'
+    ])
+    .config(function($routeProvider){
+      $routeProvider
+        .when('/', {
+          templateUrl: 'app/partials/home.html'
+        })
+        .otherwise({
+          redirectTo: '/'
+        });
+    });
 
 // angular
 //   .module('issuesApp', [
@@ -21,5 +33,4 @@
 //         redirectTo: '/'
 //       });
 //   });
-
 })();

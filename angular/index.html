@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" ng-app="issuesApp">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,29 +12,29 @@
 
   <link href="../assets/font-awesome/css/font-awesome.min.css" rel="stylesheet">
 </head>
-<body ng-app="issuesApp">
+<body>
   <div class="container">
-
-      <!-- Static navbar -->
-      <div class="navbar navbar-default" role="navigation">
-          <div class="container-fluid">
-              <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                      <span class="sr-only">Toggle navigation</span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="#">Issue Tracker</a>
-              </div>
-              <div class="navbar-collapse collapse">
-                  <ul class="nav navbar-nav">
-                      <li><a href='#/index'>Home</a></li>
-                      <li><a href='#/requests'>Requests</a></li>
-                  </ul>
-              </div><!--/.nav-collapse -->
-          </div><!--/.container-fluid -->
-      </div>
+    <!-- Static navbar -->
+    <div class="navbar navbar-default" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Issue Tracker</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href='#/'>Home</a></li>
+                    <li><a href='#/requests'>Requests</a></li>
+                </ul>
+            </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+    </div>
+    <div ng-view></div>
   </div>
 
   <script type="text/x-handlebars" data-template-name="index">
@@ -270,6 +270,8 @@
 
   <!-- Angular specific -->
   <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/angular-route/angular-route.js"></script>
+
   <script src="app/app.js"></script>
 
   <!-- End Angular-->
