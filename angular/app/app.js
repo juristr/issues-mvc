@@ -22,12 +22,11 @@
 
   angular.module('issuesApp')
     .controller('RequestListController', ['$scope', function($scope){
-      // $scope.filteredRequests = [
-      //   {
-      //     title: 'Test title 1'
-      //   }
-      // ];
-      $scope.filteredRequests = [];
+      $scope.filteredRequests = [
+        {
+          title: 'Test title 1'
+        }
+      ];
     }]);
 
 

@@ -39,7 +39,7 @@
         <div class="panel-body" style="padding:0">
           <ul class="well-list issues-list">
             <li ng-if="filteredRequests.length > 0" ng-repeat="item in filteredRequests">
-              {{ item.title }}
+              <request-list-entry></request-list-entry>
             </li>
             <li ng-if="filteredRequests.length == 0">
               Oops, nothing to show here. Do you want to <a href="requests/create">add</a> a new one??

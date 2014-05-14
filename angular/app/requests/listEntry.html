@@ -1,0 +1,29 @@
+<li class="issue">
+  <div class="row">
+    <div class="col-xs-1">
+      <input type="checkbox">
+    </div>
+    <div class="col-xs-8">
+      <div class="issue-title">
+        <span class="str-truncated">
+          <a href="requests/details"> {{ title }} </a>
+        </span>
+      </div>
+      <div class="issue-info">
+        assigned to <a class="author_link" href="/u/juri.strumpflohner"><span class="author">{{ author }}</span></a>
+        <span>
+          <i class="fa fa-comments"></i> {{ comments.length }}
+        </span>
+      </div>
+    </div>
+    <div class="col-xs-3" style="text-align:right">
+      <div class="issue-actions">
+        <a href="requests/edit" class="btn btn-default btn-xs"><i class="fa fa-pencil-square-o"></i> Edit</a>
+      </div>
+      <div class="issue-info">
+          <small>updated <time class="issue_update_ago" data-placement="bottom" data-toggle="tooltip">{{format-date lastUpdated }}</time>
+          </small>
+      </div>
+    </div>
+  </div>
+</li>
