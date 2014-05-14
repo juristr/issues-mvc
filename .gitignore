@@ -1,1 +1,2 @@
-bower_components
+# leave bower components in the repo for easy publishing on gh-pages
+# bower_components
