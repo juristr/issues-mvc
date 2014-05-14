@@ -1,0 +1,59 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="pull-left">
+      <h1>Issues</h1>
+    </div>
+    <div class="pull-right">
+      <a href="requests/create" class="btn btn-success"><i class="fa fa-plus"></i> New Issue</a>
+    </div>
+  </div>
+</div>
+<hr/>
+<div class="row">
+  <div class="col-md-3">
+    <ul class="nav nav-pills nav-stacked">
+      <li>
+        <a href="requests">All</a>
+      </li>
+      <li>
+        <a href="requests/assigned">Assigned to you</a>
+      </li>
+      <li>
+        <a href="requests/created">Created by you</a>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-9">
+    <div class="request-filter-actions">
+      <a href="requests.index?status=open" class="btn btn-default btn-sm">
+        {{ openItems.length}} Open
+      </a>
+      <a href="requests.index?status=closed" class="btn btn-default btn-sm">
+        {{closedItems.length}} Closed
+      </a>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+          <input type="checkbox">
+        </div>
+        <div class="panel-body" style="padding:0">
+          <ul class="well-list issues-list">
+            <li ng-repeat="item in filteredRequests">
+              {{ item }}
+            </li>
+            <!--
+            {{#if filteredRequests.length}}
+              {{#each filteredRequests }}
+                {{partial "requests/listentry"}}
+              {{/each}}
+            {{else}}
+              <li>
+                Oops, nothing to show here. Do you want to {{#link-to "requests.create"}}add{{/link-to}} a new one??
+              </li>
+            {{/if}}
+            -->
+          </ul>
+        </div>
+    </div>
+  </div>
+</div>

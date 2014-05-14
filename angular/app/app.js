@@ -11,6 +11,9 @@
         .when('/', {
           templateUrl: 'app/partials/home.html'
         })
+        .when('/requests', {
+          templateUrl: 'app/partials/requests.html'
+        })
         .otherwise({
           redirectTo: '/'
         });
