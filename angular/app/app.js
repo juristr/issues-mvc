@@ -12,12 +12,24 @@
           templateUrl: 'app/partials/home.html'
         })
         .when('/requests', {
-          templateUrl: 'app/partials/requests.html'
+          templateUrl: 'app/partials/requests.html',
+          controller: 'RequestListController'
         })
         .otherwise({
           redirectTo: '/'
         });
     });
+
+  angular.module('issuesApp')
+    .controller('RequestListController', ['$scope', function($scope){
+      // $scope.filteredRequests = [
+      //   {
+      //     title: 'Test title 1'
+      //   }
+      // ];
+      $scope.filteredRequests = [];
+    }]);
+
 
 // angular
 //   .module('issuesApp', [

@@ -38,8 +38,11 @@
         </div>
         <div class="panel-body" style="padding:0">
           <ul class="well-list issues-list">
-            <li ng-repeat="item in filteredRequests">
-              {{ item }}
+            <li ng-if="filteredRequests.length > 0" ng-repeat="item in filteredRequests">
+              {{ item.title }}
+            </li>
+            <li ng-if="filteredRequests.length == 0">
+              Oops, nothing to show here. Do you want to <a href="requests/create">add</a> a new one??
             </li>
             <!--
             {{#if filteredRequests.length}}
