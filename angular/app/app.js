@@ -24,7 +24,10 @@
     .controller('RequestListController', ['$scope', function($scope){
       $scope.filteredRequests = [
         {
-          title: 'Test title 1'
+          title: 'Test title 1',
+          description: 'I am the description',
+          author: 'Juri',
+          comments: []
         }
       ];
     }]);
