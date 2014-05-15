@@ -28,6 +28,7 @@
     .controller('RequestsListController', ['$scope', function($scope){
       $scope.filteredRequests = [
         {
+          id: 1,
           title: 'Test title 1',
           description: 'I am the description',
           author: 'Juri',
@@ -39,10 +40,25 @@
   angular.module('issuesApp')
     .controller('RequestsDetailsController', ['$scope', function($scope){
       $scope.item = {
+          id: 1,
           title: 'Test title 1',
-          description: 'I am the description',
+          status: 'closed',
+          description: 'I am the description111',
           author: 'Juri',
-          comments: []
+          comments: [
+            {
+              comment: 'open',
+              author: 'Juri',
+              systemLog: true,
+              lastUpdated: new Date()
+            },
+            {
+              comment: 'Hi, this is a test comment',
+              author: 'Juri',
+              systemLog: false,
+              lastUpdated: new Date()
+            }
+          ]
         };
 
       $scope.close = function(item){
@@ -50,6 +66,18 @@
       };
       $scope.reOpen = function(item){
         console.log('reopen item');
+      };
+
+      $scope.addComment = function(commentBody){
+        $scope.item.comments.push({
+          comment: commentBody,
+          author: 'Juri',
+          systemLog: false,
+          lastUpdated: new Date()
+        });
+      };
+      $scope.removeComment = function(){
+
       };
 
     }]);

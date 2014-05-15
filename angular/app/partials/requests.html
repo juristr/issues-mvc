@@ -4,7 +4,7 @@
       <h1>Issues</h1>
     </div>
     <div class="pull-right">
-      <a href="requests/create" class="btn btn-success"><i class="fa fa-plus"></i> New Issue</a>
+      <a href="#/requests/create" class="btn btn-success"><i class="fa fa-plus"></i> New Issue</a>
     </div>
   </div>
 </div>
@@ -13,22 +13,22 @@
   <div class="col-md-3">
     <ul class="nav nav-pills nav-stacked">
       <li>
-        <a href="requests">All</a>
+        <a href="#/requests">All</a>
       </li>
       <li>
-        <a href="requests/assigned">Assigned to you</a>
+        <a href="#/requests/assigned">Assigned to you</a>
       </li>
       <li>
-        <a href="requests/created">Created by you</a>
+        <a href="#/requests/created">Created by you</a>
       </li>
     </ul>
   </div>
   <div class="col-md-9">
     <div class="request-filter-actions">
-      <a href="requests.index?status=open" class="btn btn-default btn-sm">
+      <a href="#/requests.index?status=open" class="btn btn-default btn-sm">
         {{ openItems.length}} Open
       </a>
-      <a href="requests.index?status=closed" class="btn btn-default btn-sm">
+      <a href="#/requests.index?status=closed" class="btn btn-default btn-sm">
         {{closedItems.length}} Closed
       </a>
     </div>
@@ -41,7 +41,7 @@
             <li class="issue" request-list-entry="item" ng-if="filteredRequests.length > 0" ng-repeat="item in filteredRequests">
             </li>
             <li ng-if="filteredRequests.length == 0">
-              Oops, nothing to show here. Do you want to <a href="requests/create">add</a> a new one??
+              Oops, nothing to show here. Do you want to <a href="#/requests/create">add</a> a new one??
             </li>
             <!--
             {{#if filteredRequests.length}}
