@@ -3,7 +3,7 @@ angular.module('issuesApp')
         return {
             restrict: 'A',
             scope: {
-                item: '=item'
+                customerItem: '=requestListEntry'
             },
             templateUrl: 'app/requests/listEntry.html'
             // link: function($scope, element, attrs){
