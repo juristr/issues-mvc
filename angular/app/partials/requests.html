@@ -25,10 +25,10 @@
   </div>
   <div class="col-md-9">
     <div class="request-filter-actions">
-      <a href="#/requests.index?status=open" class="btn btn-default btn-sm">
+      <a href="#/requests?status=open" class="btn btn-default btn-sm">
         {{ openItems.length}} Open
       </a>
-      <a href="#/requests.index?status=closed" class="btn btn-default btn-sm">
+      <a href="#/requests?status=closed" class="btn btn-default btn-sm">
         {{closedItems.length}} Closed
       </a>
     </div>
@@ -38,9 +38,9 @@
         </div>
         <div class="panel-body" style="padding:0">
           <ul class="well-list issues-list">
-            <li class="issue" request-list-entry="item" ng-if="filteredRequests.length > 0" ng-repeat="item in filteredRequests">
+            <li class="issue" request-list-entry="item" ng-if="requests.length > 0" ng-repeat="item in requests">
             </li>
-            <li ng-if="filteredRequests.length == 0">
+            <li ng-if="requests.length == 0">
               Oops, nothing to show here. Do you want to <a href="#/requests/create">add</a> a new one??
             </li>
             <!--

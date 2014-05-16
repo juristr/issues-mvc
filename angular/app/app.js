@@ -11,7 +11,7 @@
         .when('/', {
           templateUrl: 'app/partials/home.html'
         })
-        .when('/requests', {
+        .when('/requests/:authorFilter?', {
           templateUrl: 'app/partials/requests.html',
           controller: 'RequestsListController'
         })
@@ -25,30 +25,42 @@
     });
 
   angular.module('issuesApp')
-    .controller('RequestsListController', ['$scope', function($scope){
-      $scope.filteredRequests = [
-        {
-          id: 1,
-          title: 'Test title 1',
-          description: 'I am the description',
-          author: 'Juri',
-          comments: []
-        }
-      ];
+    .controller('RequestsListController', ['$scope', '$routeParams', function($scope, $routeParams){
+      console.log('Visualizing: ' + $routeParams.authorFilter);
+
+
+      var requests = [
+          {
+            id: 1,
+            title: 'Test title 1',
+            description: 'I am the description',
+            author: 'Juri',
+            owner: 'Juri',
+            comments: []
+          },
+          {
+            id: 2,
+            title: 'Test title 1',
+            description: 'I am the description',
+            author: 'Christoph',
+            owner: 'Juri',
+            comments: []
+          }
+        ];
+
+
+      if($routeParams.authorFilter){
+        $scope.requests = requests.filter(function(element){
+          if($routeParams.authorFilter === 'assigned'){
+            return element.owner === 'Juri';
+          }else{
+            return element.author === 'Juri';
+          }
+        });
+      }else{
+        $scope.requests = requests;
+      }
     }]);
-
-
-  var guid = (function() {
-    function s4() {
-      return Math.floor((1 + Math.random()) * 0x10000)
-                 .toString(16)
-                 .substring(1);
-    }
-    return function() {
-      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
-             s4() + '-' + s4() + s4() + s4();
-    };
-  })();
 
   angular.module('issuesApp')
     .controller('RequestsDetailsController', ['$scope', function($scope){
@@ -128,6 +140,18 @@
       };
 
     }]);
+
+  var guid = (function() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+                 .toString(16)
+                 .substring(1);
+    }
+    return function() {
+      return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+             s4() + '-' + s4() + s4() + s4();
+    };
+  })();
 
 
 // angular
