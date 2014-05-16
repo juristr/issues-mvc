@@ -37,68 +37,6 @@
     <div ng-view></div>
   </div>
 
-  <script type="text/x-handlebars" data-template-name="requests/_new">
-    {{#link-to "requests.create" class="btn btn-success"}}<i class="fa fa-plus"></i> New Issue{{/link-to}}
-  </script>
-
-  <script type="text/x-handlebars" data-template-name="requests/details">
-
-
-    <!-- comments -->
-    {{#each comments}}
-      {{#if systemLog }}
-        <div class="row" style="padding-top:15px;padding-bottom:15px">
-          <div class="col-md-1">
-          </div>
-          <div class="col-md-11 meta-info">
-            <!--<i class="fa fa-dot-circle-o"></i>-->
-            <span class="label label-danger"><i class="fa fa-ban"></i></a></span> <span class="author">{{ author }}</span> changed this to <strong>{{ comment }}</strong> {{format-date lastUpdated}}.
-          </div>
-        </div>
-      {{else}}
-        <div class="row">
-          <div class="col-md-1">
-            <img alt="Juri Strumpflohner" class="timeline-comment-avatar js-avatar" data-user="542458" height="48" src="https://avatars2.githubusercontent.com/u/542458?s=140" width="48">
-          </div>
-          <div class="col-md-11">
-            <div class="panel panel-default">
-              <div class="panel-heading">
-                <span>created by {{ author }}&nbsp;{{format-date lastUpdated }}</span>
-                <span class="pull-right">
-                  <a href="#" class="btn btn-xs btn-default"><i class="fa fa-pencil"></i></a>
-                  <button class="btn btn-default btn-xs" {{action "removeComment" this }}>
-                    <i class="fa fa-times"></i>
-                  </button>
-                </span>
-              </div>
-              <div class="panel-body">
-                <p>
-                  {{format-markdown comment }}
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      {{/if}}
-    {{/each}}
-    <div class="row">
-      <div class="col-md-1">
-        <img alt="Juri Strumpflohner" class="timeline-comment-avatar js-avatar" height="48" src="https://avatars2.githubusercontent.com/u/542458?s=140" width="48">
-      </div>
-      <div class="col-md-11">
-        <form role="form">
-          <div class="form-group">
-            {{ newComment }}
-            {{view Ember.TextArea valueBinding="commentBody" placeholder="Enter your comment.." class="form-control"}}
-          </div>
-          <div>
-            <button class="btn btn-default btn-success pull-right" {{action 'addComment'this }}>Add comment</button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </script>
-
   <script type="text/x-handlebars" data-template-name="requests/edit">
     <h2>{{ title }}</h2>
     <form role="form">

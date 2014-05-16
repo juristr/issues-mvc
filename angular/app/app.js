@@ -29,11 +29,13 @@
       console.log('Visualizing: ' + $routeParams.assignedFilter);
 
       $scope.assignedFilter = $routeParams.assignedFilter || '';
+      $scope.statusFilter = $routeParams.status || 'open';
 
       var requests = [
           {
             id: 1,
             title: 'Test title 1',
+            status: 'open',
             description: 'I am the description',
             author: 'Juri',
             owner: 'Juri',
@@ -42,6 +44,7 @@
           {
             id: 2,
             title: 'Test title 1',
+            status: 'open',
             description: 'I am the description',
             author: 'Christoph',
             owner: 'Juri',
@@ -60,6 +63,7 @@
       }else{
         $scope.requests = requests;
       }
+
     }]);
 
   angular.module('issuesApp')

@@ -25,11 +25,11 @@
   </div>
   <div class="col-md-9">
     <div class="request-filter-actions">
-      <a href="#/requests?status=open" class="btn btn-default btn-sm">
-        {{ openItems.length}} Open
+      <a href="#/requests/{{assignedFilter}}?status=open" class="btn btn-default btn-sm">
+        {{ (requests | filter:{status:'open'}).length }} Open
       </a>
-      <a href="#/requests?status=closed" class="btn btn-default btn-sm">
-        {{closedItems.length}} Closed
+      <a href="#/requests/{{assignedFilter}}?status=closed" class="btn btn-default btn-sm">
+        {{ (requests | filter:{status:'closed'}).length }} Closed
       </a>
     </div>
     <div class="panel panel-default">
@@ -38,22 +38,11 @@
         </div>
         <div class="panel-body" style="padding:0">
           <ul class="well-list issues-list">
-            <li class="issue" request-list-entry="item" ng-if="requests.length > 0" ng-repeat="item in requests">
+            <li class="issue" request-list-entry="item" ng-if="requests.length > 0" ng-repeat="item in requests | filter:{status:statusFilter}">
             </li>
-            <li ng-if="requests.length == 0">
+            <li ng-if="(requests | filter:{status:statusFilter}).length == 0">
               Oops, nothing to show here. Do you want to <a href="#/requests/create">add</a> a new one??
             </li>
-            <!--
-            {{#if filteredRequests.length}}
-              {{#each filteredRequests }}
-                {{partial "requests/listentry"}}
-              {{/each}}
-            {{else}}
-              <li>
-                Oops, nothing to show here. Do you want to {{#link-to "requests.create"}}add{{/link-to}} a new one??
-              </li>
-            {{/if}}
-            -->
           </ul>
         </div>
     </div>
