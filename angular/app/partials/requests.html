@@ -4,7 +4,7 @@
       <h1>Issues</h1>
     </div>
     <div class="pull-right">
-      <a href="#/requests/create" class="btn btn-success"><i class="fa fa-plus"></i> New Issue</a>
+      <a href="#/request/create" class="btn btn-success"><i class="fa fa-plus"></i> New Issue</a>
     </div>
   </div>
 </div>
@@ -41,7 +41,7 @@
             <li class="issue" request-list-entry="item" ng-if="requests.length > 0" ng-repeat="item in requests | filter:{status:statusFilter}">
             </li>
             <li ng-if="(requests | filter:{status:statusFilter}).length == 0">
-              Oops, nothing to show here. Do you want to <a href="#/requests/create">add</a> a new one??
+              Oops, nothing to show here. Do you want to <a href="#/request/create">add</a> a new one??
             </li>
           </ul>
         </div>

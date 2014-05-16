@@ -1,0 +1,16 @@
+<h2>{{ item.title }}</h2>
+<form role="form">
+  <div class="form-group">
+    <label>Title</label>
+    <input type="text" class="form-control" placeholder="Enter title" ng-model="item.title"/>
+  </div>
+  <div class="form-group">
+    <label>Description</label>
+    <textarea class="form-control" rows="10" placeholder="Enter description" ng-model="item.description"></textarea>
+  </div>
+  <hr>
+  <div class="form-actions">
+    <button type="submit" class="btn btn-primary" ng-click="save()">Save changes</button>
+    <button type="submit" class="btn btn-default pull-right" ng-click="cancel()">Cancel</button>
+  </div>
+</form>

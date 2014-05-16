@@ -15,6 +15,10 @@
           templateUrl: 'app/partials/requests.html',
           controller: 'RequestsListController'
         })
+        .when('/request/:mode/:id?', {
+          templateUrl: 'app/requests/editRequest.html',
+          controller: 'RequestsEditController'
+        })
         .when('/requests/details/:id', {
           templateUrl: 'app/details/requestDetail.html',
           controller: 'RequestsDetailsController'
@@ -63,6 +67,30 @@
       }else{
         $scope.requests = requests;
       }
+
+    }]);
+
+
+  angular.module('issuesApp')
+    .controller('RequestsEditController', ['$scope', '$routeParams', function($scope, $routeParams){
+
+      if($routeParams.mode === 'edit'){
+        $scope.item = {
+          id: $routeParams.id,
+          title: 'Test title 1',
+          status: 'open',
+          description: 'I am the description111',
+          author: 'Juri',
+        };
+      }
+
+      $scope.save = function(){
+        console.log('saving ' + $scope.title + " with " + $scope.description);
+      };
+
+      $scope.cancel = function(){
+        window.history.back();
+      };
 
     }]);
 
