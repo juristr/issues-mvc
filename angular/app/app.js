@@ -11,7 +11,7 @@
         .when('/', {
           templateUrl: 'app/partials/home.html'
         })
-        .when('/requests/:authorFilter?', {
+        .when('/requests/:assignedFilter?', {
           templateUrl: 'app/partials/requests.html',
           controller: 'RequestsListController'
         })
@@ -26,8 +26,9 @@
 
   angular.module('issuesApp')
     .controller('RequestsListController', ['$scope', '$routeParams', function($scope, $routeParams){
-      console.log('Visualizing: ' + $routeParams.authorFilter);
+      console.log('Visualizing: ' + $routeParams.assignedFilter);
 
+      $scope.assignedFilter = $routeParams.assignedFilter || '';
 
       var requests = [
           {
@@ -48,10 +49,9 @@
           }
         ];
 
-
-      if($routeParams.authorFilter){
+      if($scope.assignedFilter){
         $scope.requests = requests.filter(function(element){
-          if($routeParams.authorFilter === 'assigned'){
+          if($scope.assignedFilter === 'assigned'){
             return element.owner === 'Juri';
           }else{
             return element.author === 'Juri';

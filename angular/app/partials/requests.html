@@ -12,13 +12,13 @@
 <div class="row">
   <div class="col-md-3">
     <ul class="nav nav-pills nav-stacked">
-      <li>
+      <li ng-class="{active: assignedFilter == ''}">
         <a href="#/requests">All</a>
       </li>
-      <li>
+      <li ng-class="{active: assignedFilter == 'assigned'}">
         <a href="#/requests/assigned">Assigned to you</a>
       </li>
-      <li>
+      <li ng-class="{active: assignedFilter == 'created'}">
         <a href="#/requests/created">Created by you</a>
       </li>
     </ul>
