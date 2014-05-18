@@ -56,6 +56,10 @@
       </div>
     </script>
 
+    <script type="text/mustache" id="new">
+      <a href="#!request/create" class="btn btn-success"><i class="fa fa-plus"></i> New Issue</a>
+    </script>
+
     <script type="text/mustache" id="requests_index">
       <div class="row">
         <div class="col-md-12">
@@ -63,7 +67,7 @@
             <h1>Issues</h1>
           </div>
           <div class="pull-right">
-            {{partial "requests/new"}}
+            {{> new }}
           </div>
         </div>
       </div>
@@ -95,6 +99,7 @@
                 <ul class="well-list issues-list">
                   {{#if filteredRequests.length}}
                     {{#each filteredRequests }}
+                      <!-- should be factored out -->
                       <li class="issue">
                         <div class="row">
                           <div class="col-xs-1">
@@ -115,7 +120,7 @@
                           </div>
                           <div class="col-xs-3" style="text-align:right">
                             <div class="issue-actions">
-                              {{#link-to "requests.edit" this class="btn btn-default btn-xs"}}<i class="fa fa-pencil-square-o"></i> Edit{{/link-to}}
+                              <a href="#!request/edit/{{ id }}" class="btn btn-default btn-xs"><i class="fa fa-pencil-square-o"></i> Edit</a>
                             </div>
                             <div class="issue-info">
                                 <small>updated <time class="issue_update_ago" data-placement="bottom" data-toggle="tooltip">{{format-date lastUpdated }}</time>
@@ -137,10 +142,31 @@
       </div>
     </script>
 
+    <script type="text/mustache" id="request_edit">
+      <h2>{{ issue.title }}</h2>
+      <form role="form">
+        <div class="form-group">
+          <label>Title</label>
+          <input type="text" class="form-control" placeholder="Enter title" {{ value issue.title }} />
+        </div>
+        <div class="form-group">
+          <label>Description</label>
+          <textarea rows="10" class="form-control" placeholder="Enter description" {{ value issue.description }} />
+        </div>
+        <hr>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary js-save">Save changes</button>
+          <button type="submit" class="btn btn-default pull-right js-cancel">Cancel</button>
+        </div>
+      </form>
+    </script>
+
 
     <div id="js-content"></div>
 
     <script type='text/javascript' src='bower_components/requirejs/require.js' data-main='issues'></script>
     <script type='text/javascript' src='requirejsconfig.js'></script>
+
+    <script src="//localhost:35729/livereload.js"></script>
   </body>
 </html>

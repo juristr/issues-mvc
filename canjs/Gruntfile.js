@@ -89,7 +89,15 @@ module.exports = function(grunt) {
 					keepalive : true
 				}
 			}
-		}
+		},
+		watch: {
+            scripts: {
+                files: ["*.js", "*.html"],
+                options: {
+                    livereload: true
+                }
+            }
+        }
 	});
 
 	grunt.registerTask('extractViews', function(){
@@ -125,8 +133,9 @@ module.exports = function(grunt) {
 
 	grunt.loadNpmTasks('grunt-contrib-requirejs');
 	grunt.loadNpmTasks('grunt-exec');
-	grunt.registerTask('default', 'build');
+	
 	grunt.loadNpmTasks('grunt-contrib-connect');
+	grunt.loadNpmTasks("grunt-contrib-watch");
 
-
+	grunt.registerTask('default', 'watch');
 };

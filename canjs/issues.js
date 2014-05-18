@@ -13,10 +13,7 @@ require(['can', 'mustache', 'canLocalStorage'], function(can){
         },
 
         'requests route': function(){
-            if(this._currentPageController)
-                this._currentPageController.destroy();
-
-            this._currentPageController = new RequestListController(this.element.find('.js-content-container'));
+            this._instantiateController(RequestListController);
         },
 
         'requests/created_by route': function(){
@@ -32,11 +29,25 @@ require(['can', 'mustache', 'canLocalStorage'], function(can){
         },
 
         'request/edit/:id route': function(){
-
+            this._instantiateController(RequestEditController, { 
+                issue: new Issue({
+                    id: 1,
+                    title: 'Test issue title',
+                    author: 'Juri',
+                    description: 'Some description'
+                }) 
+            });
         },
 
         'request/create route': function(){
+            this._instantiateController(RequestEditController);
+        },
 
+        _instantiateController: function(controllerClass, options){
+            if(this._currentPageController)
+                this._currentPageController.destroy();
+
+            this._currentPageController = new controllerClass(this.element.find('.js-content-container'), options);
         }
 
     });
@@ -74,6 +85,31 @@ require(['can', 'mustache', 'canLocalStorage'], function(can){
 
         }
 
+    });
+
+    var RequestEditController = can.Control({
+        _model: undefined,
+
+        init: function(element, options){
+
+            if(options && options.issue){
+                this._model = new Issue(options.issue.attr());
+            }else{
+                this._model = new Issue();
+            }
+
+            this.element.html(can.view('request_edit', { issue: this._model }));
+        },
+
+        '.js-save click': function(){
+            console.log('saving');
+
+            window.location.hash = '#!requests';
+        },
+
+        '.js-cancel click': function(){
+            window.location.hash = '#!requests';
+        }
     });
 
     /*
@@ -140,6 +176,26 @@ require(['can', 'mustache', 'canLocalStorage'], function(can){
             return this.attr('length') === this.completed().length;
         }
         */
+    });
+
+
+    // 2-way binds an element and value
+    var Value = can.Control({
+        init: function(){
+            this.set()
+        },
+        "{value} change": "set",
+        set: function(){
+            this.element.val(this.options.value())
+        },
+        "change": function(){
+            this.options.value(this.element.val())
+        }
+    });
+    can.Mustache.registerHelper('value', function(value){
+        return function(el){
+            new Value(el, {value: value});
+        }
     });
 
 
