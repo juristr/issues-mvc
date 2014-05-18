@@ -1,4 +1,4 @@
-require(['can', 'mustache', 'canLocalStorage'], function(can){
+require(['can', 'mustache', 'canLocalStorage', 'moment', '../assets/libs/showdown'], function(can){
     'use strict';
 
     var Router = can.Control({
@@ -24,8 +24,27 @@ require(['can', 'mustache', 'canLocalStorage'], function(can){
 
         },
 
-        'details/:id route': function(){
+        'requests/details/:id route': function(){
+            var list = new Issue({
+                id: 1,
+                title: 'Test issue title',
+                description: 'Some **formatted** description!',
+                author: 'Juri',
+                owner: 'Juri',
+                status: 'open',
+                createdDate: new Date(),
+                updatedDate: new Date(),
+                comments: [
+                    {
+                        id: 1,
+                        comment: 'Test comment',
+                        author: 'Juri'
+                    }
+                ]
+            });
 
+
+            this._instantiateController(RequestDetailController, list);
         },
 
         'request/edit/:id route': function(){
@@ -112,6 +131,52 @@ require(['can', 'mustache', 'canLocalStorage'], function(can){
         }
     });
 
+    var RequestDetailController = can.Control({
+        commentBody: undefined,
+
+        init: function(element, options){
+            this.element.html(can.view('request_details', options));
+        },
+
+        '.js-reopen click': function(){
+            // write log
+            this.options.attr('comments').push({
+                  comment: 'open',
+                  author: 'Juri',
+                  systemLog: true,
+                  lastUpdated: new Date()
+                });
+
+            this.options.attr('status', 'open');
+        },
+
+        '.js-close click': function(){
+            // write log
+            this.options.attr('comments').push({
+                  comment: 'closed',
+                  author: 'Juri',
+                  systemLog: true,
+                  lastUpdated: new Date()
+                });
+
+            this.options.attr('status', 'closed');
+        },
+
+        '.js-add-comment click': function(){
+            var newComment = this.element.find('.js-new-comment').val();
+
+            var comment = {
+                comment: newComment,
+                author: 'Juri',
+                lastUpdated: new Date()
+              };
+
+            this.options.attr('comments').push(comment);
+
+             this.element.find('.js-new-comment').val('');
+        }
+    });
+
     /*
     can.Component.extend({
         tag: 'issue-entry',
@@ -121,7 +186,9 @@ require(['can', 'mustache', 'canLocalStorage'], function(can){
 
    
     var Issue = can.Model.extend({
-
+        isOpen: function(){
+            return this.attr('status') === 'open';
+        }
     });
 
     // List for Todos
@@ -196,6 +263,15 @@ require(['can', 'mustache', 'canLocalStorage'], function(can){
         return function(el){
             new Value(el, {value: value});
         }
+    });
+
+    var showdown = new Showdown.converter();
+    can.Mustache.registerHelper('format-markdown', function(value){
+        return showdown.makeHtml(value());
+    });
+
+    can.Mustache.registerHelper('format-date', function(value){
+        return moment(value).fromNow();
     });
 
 
