@@ -3,9 +3,41 @@ require(['can', 'mustache', 'canLocalStorage', 'moment', '../assets/libs/showdow
 
     var Router = can.Control({
         _currentPageController: undefined,
+        _issueList: undefined,
 
         init: function(){
             this.element.find('#js-content').html(can.view('application'));
+
+            this._issueList = new Issue.List([
+                    new Issue({
+                        id: 1,
+                        title: 'Issue 1 test',
+                        description: 'Some description',
+                        status: 'open',
+                        author: 'Juri',
+                        owner: 'Juri',
+                        createdDate: new Date(),
+                        updatedDate: new Date(),
+                        comments: [
+                            {
+                                id: 1,
+                                comment: 'Test comment',
+                                author: 'Juri'
+                            }
+                        ]
+                    }),
+                    new Issue({
+                        id: 2,
+                        title: 'Issue 2 test',
+                        description: 'Another issue',
+                        author: 'Juri',
+                        status: 'open',
+                        owner: 'Juri',
+                        createdDate: new Date(),
+                        updatedDate: new Date(),
+                        comments: []
+                    })                    
+                ]);
         },
 
         'route': function(){
@@ -13,7 +45,7 @@ require(['can', 'mustache', 'canLocalStorage', 'moment', '../assets/libs/showdow
         },
 
         'requests route': function(){
-            this._instantiateController(RequestListController);
+            this._instantiateController(RequestListController, { list: this._issueList });
         },
 
         'requests/created_by route': function(){
@@ -24,7 +56,7 @@ require(['can', 'mustache', 'canLocalStorage', 'moment', '../assets/libs/showdow
 
         },
 
-        'requests/details/:id route': function(){
+        'requests/details/:id route': function(params){
             var list = new Issue({
                 id: 1,
                 title: 'Test issue title',
@@ -43,8 +75,7 @@ require(['can', 'mustache', 'canLocalStorage', 'moment', '../assets/libs/showdow
                 ]
             });
 
-
-            this._instantiateController(RequestDetailController, list);
+            this._instantiateController(RequestDetailController, this._issueList.getById(parseInt(params.id, 10)));
         },
 
         'request/edit/:id route': function(){
@@ -77,29 +108,10 @@ require(['can', 'mustache', 'canLocalStorage', 'moment', '../assets/libs/showdow
 
     var RequestListController = can.Control({
 
-        init: function(){
-            var list = new Issue.List([
-                    new Issue({
-                        id: 1,
-                        title: 'Issue 1 test',
-                        description: 'Some description',
-                        status: 'open',
-                        author: 'Juri',
-                        owner: 'Juri'
-                    }),
-                    new Issue({
-                        id: 2,
-                        title: 'Issue 2 test',
-                        description: 'Another issue',
-                        author: 'Juri',
-                        status: 'open',
-                        owner: 'Juri'
-                    })                    
-                ]);
-
+        init: function(element, options){
 
             this.element.html(can.view('requests_index', {
-                filteredRequests: list
+                filteredRequests: options.list
             }));
 
         }
@@ -121,8 +133,6 @@ require(['can', 'mustache', 'canLocalStorage', 'moment', '../assets/libs/showdow
         },
 
         '.js-save click': function(){
-            console.log('saving');
-
             window.location.hash = '#!requests';
         },
 
@@ -215,6 +225,16 @@ require(['can', 'mustache', 'canLocalStorage', 'moment', '../assets/libs/showdow
             return this.filter(function (issue) {
                 return issue.attr('status') === 'open';
             });
+        },
+
+        getById: function(issueId){
+            for(var i=0; i<this.length; i++){
+                if(this[i].attr('id') === issueId){
+                    return this[i];
+                }
+            }
+
+            return null;
         }        
         
         /*filter: function (check) {
